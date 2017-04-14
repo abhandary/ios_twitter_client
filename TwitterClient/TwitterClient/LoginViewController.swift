@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import SafariServices
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
+    
+    var svc : SFSafariViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         signUpButton.layer.cornerRadius = 5
@@ -29,18 +33,27 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {
-    let user = UserAccountManager.createUser()
-        user.loginUser(presentingViewController:self,
-                       success: { () in
+        let user = UserAccountManager.createUser()
+        user.delegate = self
+        user.loginUser(success: { () in
             print("success");
+            self.svc?.dismiss(animated: true, completion: nil);
         }) { (error) in
             print(error)
+            self.svc?.dismiss(animated: true, completion: nil);
         }
         
     }
     
     @IBAction func prepareForUnwind(segue : UIStoryboardSegue) {
         
+    }
+}
+
+extension LoginViewController : UserAccountDelegate {
+    func receivedRequestToken(url: URL) {
+        self.svc = SFSafariViewController(url: url)
+        self.present(self.svc!, animated: true, completion: nil);
     }
 }
 

@@ -14,10 +14,11 @@
 		E2154E401E9F364400C8CEF2 /* TwitterClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2154E3E1E9F364400C8CEF2 /* TwitterClient.xcdatamodeld */; };
 		E2154E421E9F364400C8CEF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2154E411E9F364400C8CEF2 /* Assets.xcassets */; };
 		E2154E451E9F364400C8CEF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2154E431E9F364400C8CEF2 /* LaunchScreen.storyboard */; };
-		E2154E501E9F482800C8CEF2 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E4F1E9F482800C8CEF2 /* TwitterClient.swift */; };
+		E2154E501E9F482800C8CEF2 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E4F1E9F482800C8CEF2 /* OAuthClient.swift */; };
 		E2154E521E9F4B0B00C8CEF2 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E511E9F4B0B00C8CEF2 /* UserAccount.swift */; };
-		E2154E541E9F4D1700C8CEF2 /* UserStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E531E9F4D1700C8CEF2 /* UserStream.swift */; };
+		E2154E541E9F4D1700C8CEF2 /* UserStreamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E531E9F4D1700C8CEF2 /* UserStreamService.swift */; };
 		E2154E561E9F4F4700C8CEF2 /* UserAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E551E9F4F4700C8CEF2 /* UserAccountManager.swift */; };
+		E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E5C1EA0528800C8CEF2 /* UserLoginService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +33,11 @@
 		E2154E411E9F364400C8CEF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2154E441E9F364400C8CEF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2154E461E9F364400C8CEF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2154E4F1E9F482800C8CEF2 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		E2154E4F1E9F482800C8CEF2 /* OAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		E2154E511E9F4B0B00C8CEF2 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
-		E2154E531E9F4D1700C8CEF2 /* UserStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStream.swift; sourceTree = "<group>"; };
+		E2154E531E9F4D1700C8CEF2 /* UserStreamService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStreamService.swift; sourceTree = "<group>"; };
 		E2154E551E9F4F4700C8CEF2 /* UserAccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountManager.swift; sourceTree = "<group>"; };
+		E2154E5C1EA0528800C8CEF2 /* UserLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,11 +90,11 @@
 		E2154E361E9F364400C8CEF2 /* TwitterClient */ = {
 			isa = PBXGroup;
 			children = (
-				E2154E4E1E9F481A00C8CEF2 /* API */,
-				E2154E4D1E9F47B000C8CEF2 /* Interpreter */,
-				E2154E4C1E9F47A700C8CEF2 /* Presenter */,
+				E2154E4E1E9F481A00C8CEF2 /* Network Layer */,
+				E2154E4D1E9F47B000C8CEF2 /* Services Layer */,
+				E2154E4C1E9F47A700C8CEF2 /* Application Layer */,
 				E2154E371E9F364400C8CEF2 /* AppDelegate.swift */,
-				E2154E571E9F50CB00C8CEF2 /* Views */,
+				E2154E571E9F50CB00C8CEF2 /* UI Layer */,
 				E2154E3B1E9F364400C8CEF2 /* Main.storyboard */,
 				E2154E411E9F364400C8CEF2 /* Assets.xcassets */,
 				E2154E431E9F364400C8CEF2 /* LaunchScreen.storyboard */,
@@ -102,37 +104,38 @@
 			path = TwitterClient;
 			sourceTree = "<group>";
 		};
-		E2154E4C1E9F47A700C8CEF2 /* Presenter */ = {
+		E2154E4C1E9F47A700C8CEF2 /* Application Layer */ = {
 			isa = PBXGroup;
 			children = (
 				E2154E511E9F4B0B00C8CEF2 /* UserAccount.swift */,
 				E2154E551E9F4F4700C8CEF2 /* UserAccountManager.swift */,
 			);
-			name = Presenter;
+			name = "Application Layer";
 			sourceTree = "<group>";
 		};
-		E2154E4D1E9F47B000C8CEF2 /* Interpreter */ = {
+		E2154E4D1E9F47B000C8CEF2 /* Services Layer */ = {
 			isa = PBXGroup;
 			children = (
-				E2154E531E9F4D1700C8CEF2 /* UserStream.swift */,
+				E2154E531E9F4D1700C8CEF2 /* UserStreamService.swift */,
+				E2154E5C1EA0528800C8CEF2 /* UserLoginService.swift */,
 			);
-			name = Interpreter;
+			name = "Services Layer";
 			sourceTree = "<group>";
 		};
-		E2154E4E1E9F481A00C8CEF2 /* API */ = {
+		E2154E4E1E9F481A00C8CEF2 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
-				E2154E4F1E9F482800C8CEF2 /* TwitterClient.swift */,
+				E2154E4F1E9F482800C8CEF2 /* OAuthClient.swift */,
 			);
-			name = API;
+			name = "Network Layer";
 			sourceTree = "<group>";
 		};
-		E2154E571E9F50CB00C8CEF2 /* Views */ = {
+		E2154E571E9F50CB00C8CEF2 /* UI Layer */ = {
 			isa = PBXGroup;
 			children = (
 				E2154E391E9F364400C8CEF2 /* LoginViewController.swift */,
 			);
-			name = Views;
+			name = "UI Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,12 +261,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2154E501E9F482800C8CEF2 /* TwitterClient.swift in Sources */,
+				E2154E501E9F482800C8CEF2 /* OAuthClient.swift in Sources */,
 				E2154E561E9F4F4700C8CEF2 /* UserAccountManager.swift in Sources */,
+				E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */,
 				E2154E401E9F364400C8CEF2 /* TwitterClient.xcdatamodeld in Sources */,
 				E2154E3A1E9F364400C8CEF2 /* LoginViewController.swift in Sources */,
 				E2154E381E9F364400C8CEF2 /* AppDelegate.swift in Sources */,
-				E2154E541E9F4D1700C8CEF2 /* UserStream.swift in Sources */,
+				E2154E541E9F4D1700C8CEF2 /* UserStreamService.swift in Sources */,
 				E2154E521E9F4B0B00C8CEF2 /* UserAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

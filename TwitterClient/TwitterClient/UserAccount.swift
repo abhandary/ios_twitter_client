@@ -8,83 +8,48 @@
 
 import Foundation
 import SafariServices
-import BDBOAuth1Manager
 
 
-let kRequestTokenPath = "oauth/request_token"
-let kRequestTokenMethod = "GET"
-let kCallbackURL = "cpchitter://oauth"
-
-let kAuthorizePath = "/oauth/authorize"
-let kRequestTokenParam = "oauth_token"
-
-let kAccessTokenPath = "oauth/access_token"
-let kAccessTokenMethod = "POST"
+@objc protocol UserAccountDelegate {
+    func receivedRequestToken(url : URL);
+}
 
 class UserAccount {
     
+    weak var delegate : UserAccountDelegate?
     
-    weak var presentingViewController : UIViewController?
+    let loginService = UserLoginService()
+    
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((NSError) -> Void)?
     
     var svc : SFSafariViewController?
-    var homeStream : UserStream!
+    var homeStream : UserStreamService!
     
-    func loginUser(presentingViewController : UIViewController, success:@escaping((Void) -> Void), error: @escaping((NSError) -> Void)) {
+    func loginUser(success:@escaping((Void) -> Void), error: @escaping((NSError) -> Void)) {
         successCompletionHandler = success
         errorCompletionHandler = error
-        self.presentingViewController = presentingViewController
         
-        homeStream = UserStream()
+        // homeStream = UserStreamService()
         
-        TwitterClient.sharedInstance.fetchRequestToken(withPath: kRequestTokenPath,
-                                                        method: kRequestTokenMethod,
-                                                        callbackURL: URL(string:kCallbackURL)!,
-                                                        scope: nil,
-                                                        success: { (requestToken) in
-                                                            if let requestToken = requestToken {
-                                                                self.openInSafariViewController(requestToken: requestToken.token)
-                                                            } else {
-                                                                self.errorCompletionHandler?(NSError(domain: "Got empty request token!", code: 0, userInfo: nil))
-                                                            }
-            }, failure: { (error )  in
-                print(error)
-               // self.errorCompletionHandler?(error)
-        })
-    }
-    
-    func openInSafariViewController(requestToken : String) {
-        
-        let authURL = TwitterClient.sharedInstance.baseURL!.absoluteString
-        let fullURL = authURL + kAuthorizePath + "?\(kRequestTokenParam)=\(requestToken)"
-        if let url = URL(string: fullURL) {
-            // let url = URL(string:kCallbackURL)!;
-            svc = SFSafariViewController(url: url)
-            self.presentingViewController?.present(svc!, animated: true, completion: nil);
-            // UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
-        } else {
-            self.errorCompletionHandler?(NSError(domain: "Error creating auth url!", code: 0, userInfo: nil))
+        loginService.delegate = self
+        loginService.loginUser(success: { () in
+                self.successCompletionHandler?()
+            }) { (error) in
+                
         }
+        
     }
     
     func receivedOauthToken(url: URL) {
-        
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
-        // svc?.dismiss(animated: true, completion: nil);
-        if let urlQuery = url.query {
-
-        
-            TwitterClient.sharedInstance.fetchAccessToken(withPath: kAccessTokenPath,
-                                                      method: kAccessTokenMethod,
-                                                      requestToken: BDBOAuth1Credential(queryString: urlQuery),
-                                                      success: { (accessToken) in
-                                                        TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
-            }, failure: { (error )  in
-                print(error)
-                // self.errorCompletionHandler?(error)
-            })
-        }
+        self.loginService.receivedOauthToken(url: url)
     }
+}
+
+extension UserAccount : UserLoginServiceDelegate {
+    
+    func receivedRequestToken(url: URL) {
+        self.delegate?.receivedRequestToken(url: url)
+    }
+    
 }

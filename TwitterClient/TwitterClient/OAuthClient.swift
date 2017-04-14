@@ -14,9 +14,9 @@ let kTwitterConsumerSecret = "3TDgHVkIUnYN40DQwIwigo5iQk4xQhFSoeKbEZg9NdwPJWKsE8
 let kTwitterBaseURL  = "https://api.twitter.com"
 
 
-class TwitterClient : BDBOAuth1SessionManager {
+class OAuthClient : BDBOAuth1SessionManager {
     
     
-   static let sharedInstance = TwitterClient(baseURL: URL(string: kTwitterBaseURL)!, consumerKey: kTwitterConsumerKey, consumerSecret: kTwitterConsumerSecret)!;
+   static let sharedInstance = OAuthClient(baseURL: URL(string: kTwitterBaseURL)!, consumerKey: kTwitterConsumerKey, consumerSecret: kTwitterConsumerSecret)!;
     
 }

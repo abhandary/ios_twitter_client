@@ -9,6 +9,6 @@
 import Foundation
 
 
-class UserStream {
+class UserStreamService {
     
 }
