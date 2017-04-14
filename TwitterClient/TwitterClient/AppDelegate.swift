@@ -17,7 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
+        if let _ = User.currentUser {
+            let nvc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationViewController")
+            window?.rootViewController = nvc
+        }
         return true
     }
 
@@ -47,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
-        UserAccountManager.currentUserAccount()?.receivedOauthToken(url: url, success: { () in
+        UserAccount.currentUserAccount?.receivedOauthToken(url: url, success: { () in
             }, error: { (receivedError) in
                 print(receivedError)
         })

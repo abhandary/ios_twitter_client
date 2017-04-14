@@ -12,10 +12,6 @@ import UIKit
 
 class TweetCell: UITableViewCell {
 
-    @IBOutlet weak var retweetedView: UIView!
-    
-    @IBOutlet weak var retweetedViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var thumbNailImageViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var handle: UILabel!
@@ -39,14 +35,15 @@ class TweetCell: UITableViewCell {
     var tweet : Tweet! {
         didSet {
             
-            // self.retweetedViewHeight.isActive = false
-            // self.thumbNailImageViewHeight.multiplier = 1.0
-            
             tweetTextLabel.text = tweet.text
+            // tweetTextLabel.sizeToFit()
             
             // user info
             name.text = tweet.user?.name
-            handle.text = "@\(tweet.user?.screename)"
+            
+            if let screenname = tweet.user?.screename {
+                handle.text = "@\(screenname)"
+            }
             
             // thumbnail
             if let user = tweet.user,

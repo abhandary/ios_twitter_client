@@ -17,6 +17,21 @@ class UserAccount {
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((Error) -> Void)?
     
+    
+    // MARK: - construction / init routines
+    static var _currentUserAccount : UserAccount?
+    static var currentUserAccount : UserAccount? {
+        set (userAccount) {
+            _currentUserAccount = userAccount
+        }
+        
+        get {
+            if _currentUserAccount == nil {
+                _currentUserAccount = UserAccount()
+            }
+            return _currentUserAccount
+        }
+    }
 
     // MARK: - public routines
     
@@ -62,5 +77,12 @@ class UserAccount {
         
         homeTimeLineService.fetchTweets(success: success, error: error)
     }
+    
+    func fetchTweetsOlderThanLastFetch(success: @escaping (([Tweet]) -> Void),
+                     error:@escaping ((Error) -> Void)) {
+        
+        homeTimeLineService.fetchTweetsOlderThanLastFetch(success: success, error: error)
+    }
+
 }
 

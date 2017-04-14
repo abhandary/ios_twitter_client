@@ -16,6 +16,10 @@ class TimeLineViewController: UIViewController {
     var tweets : [Tweet]?
     var refreshControl : UIRefreshControl!
     
+ 
+    // for table view infiite scrolling
+    var isMoreDataLoading = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,15 +31,15 @@ class TimeLineViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        self.tableView.estimatedRowHeight = 100
-        self.tableView.rowHeight = 200
+        self.tableView.estimatedRowHeight = 200
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         reloadTable()
         
     }
 
     func reloadTable() {
-        UserAccountManager.currentUserAccount()?.fetchTweets(success: { (tweets) in
+        UserAccount.currentUserAccount?.fetchTweets(success: { (tweets) in
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
@@ -66,6 +70,9 @@ class TimeLineViewController: UIViewController {
 
 
 extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
+    
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tweets?.count ?? 0
     }
@@ -75,5 +82,32 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
         cell.tweet = self.tweets![indexPath.row]
         return cell
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+ 
+        guard self.tweets != nil else { return; }
+        guard self.tweets!.count > 0 else { return; }
+        
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                UserAccount.currentUserAccount?.fetchTweetsOlderThanLastFetch(success: { (tweets) in
+                    self.isMoreDataLoading = false
+                    self.tweets?.append(contentsOf: tweets)
+                    self.tableView.reloadData()
+                    }, error: { (receivedError) in
+                        self.isMoreDataLoading = false
+                        // @todo: show error banner
+                        print(receivedError)
+                })
+            }
+        }
     }
 }

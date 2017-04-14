@@ -10,16 +10,23 @@ import Foundation
 
 
 class Tweet {
+    
+    var tweetID : Int?
     var text : String?
     var timestamp : Date?
     var retweetCount : Int?
     var favoritesCount : Int?
+    
+    var retweeted : Bool?
     
     var user : User?
     
     static let dateFormatter = DateFormatter()
     
     init(dictionary : NSDictionary) {
+
+        // print(dictionary)
+        
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
@@ -37,6 +44,9 @@ class Tweet {
             user = User(dictionary: userDict)
         }
         
+        if let id = dictionary["id"] as? Int {
+            tweetID = id
+        }
         
     }
     
