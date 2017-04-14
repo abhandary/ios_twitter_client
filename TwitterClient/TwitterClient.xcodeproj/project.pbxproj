@@ -16,9 +16,13 @@
 		E2154E451E9F364400C8CEF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2154E431E9F364400C8CEF2 /* LaunchScreen.storyboard */; };
 		E2154E501E9F482800C8CEF2 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E4F1E9F482800C8CEF2 /* OAuthClient.swift */; };
 		E2154E521E9F4B0B00C8CEF2 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E511E9F4B0B00C8CEF2 /* UserAccount.swift */; };
-		E2154E541E9F4D1700C8CEF2 /* UserStreamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E531E9F4D1700C8CEF2 /* UserStreamService.swift */; };
+		E2154E541E9F4D1700C8CEF2 /* UserTimeLineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E531E9F4D1700C8CEF2 /* UserTimeLineService.swift */; };
 		E2154E561E9F4F4700C8CEF2 /* UserAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E551E9F4F4700C8CEF2 /* UserAccountManager.swift */; };
 		E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E5C1EA0528800C8CEF2 /* UserLoginService.swift */; };
+		E2154E601EA0619E00C8CEF2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E5F1EA0619E00C8CEF2 /* User.swift */; };
+		E2154E621EA0640B00C8CEF2 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E611EA0640B00C8CEF2 /* Tweet.swift */; };
+		E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */; };
+		E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E671EA07D0800C8CEF2 /* TweetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +39,13 @@
 		E2154E461E9F364400C8CEF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2154E4F1E9F482800C8CEF2 /* OAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		E2154E511E9F4B0B00C8CEF2 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
-		E2154E531E9F4D1700C8CEF2 /* UserStreamService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStreamService.swift; sourceTree = "<group>"; };
+		E2154E531E9F4D1700C8CEF2 /* UserTimeLineService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimeLineService.swift; sourceTree = "<group>"; };
 		E2154E551E9F4F4700C8CEF2 /* UserAccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccountManager.swift; sourceTree = "<group>"; };
 		E2154E5C1EA0528800C8CEF2 /* UserLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
+		E2154E5F1EA0619E00C8CEF2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E2154E611EA0640B00C8CEF2 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		E2154E671EA07D0800C8CEF2 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,7 @@
 		E2154E361E9F364400C8CEF2 /* TwitterClient */ = {
 			isa = PBXGroup;
 			children = (
+				E2154E5E1EA0615C00C8CEF2 /* Models */,
 				E2154E4E1E9F481A00C8CEF2 /* Network Layer */,
 				E2154E4D1E9F47B000C8CEF2 /* Services Layer */,
 				E2154E4C1E9F47A700C8CEF2 /* Application Layer */,
@@ -116,7 +125,7 @@
 		E2154E4D1E9F47B000C8CEF2 /* Services Layer */ = {
 			isa = PBXGroup;
 			children = (
-				E2154E531E9F4D1700C8CEF2 /* UserStreamService.swift */,
+				E2154E531E9F4D1700C8CEF2 /* UserTimeLineService.swift */,
 				E2154E5C1EA0528800C8CEF2 /* UserLoginService.swift */,
 			);
 			name = "Services Layer";
@@ -134,8 +143,19 @@
 			isa = PBXGroup;
 			children = (
 				E2154E391E9F364400C8CEF2 /* LoginViewController.swift */,
+				E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */,
+				E2154E671EA07D0800C8CEF2 /* TweetCell.swift */,
 			);
 			name = "UI Layer";
+			sourceTree = "<group>";
+		};
+		E2154E5E1EA0615C00C8CEF2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E2154E5F1EA0619E00C8CEF2 /* User.swift */,
+				E2154E611EA0640B00C8CEF2 /* Tweet.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,12 +282,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2154E501E9F482800C8CEF2 /* OAuthClient.swift in Sources */,
+				E2154E621EA0640B00C8CEF2 /* Tweet.swift in Sources */,
 				E2154E561E9F4F4700C8CEF2 /* UserAccountManager.swift in Sources */,
+				E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */,
 				E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */,
 				E2154E401E9F364400C8CEF2 /* TwitterClient.xcdatamodeld in Sources */,
 				E2154E3A1E9F364400C8CEF2 /* LoginViewController.swift in Sources */,
+				E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */,
+				E2154E601EA0619E00C8CEF2 /* User.swift in Sources */,
 				E2154E381E9F364400C8CEF2 /* AppDelegate.swift in Sources */,
-				E2154E541E9F4D1700C8CEF2 /* UserStreamService.swift in Sources */,
+				E2154E541E9F4D1700C8CEF2 /* UserTimeLineService.swift in Sources */,
 				E2154E521E9F4B0B00C8CEF2 /* UserAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

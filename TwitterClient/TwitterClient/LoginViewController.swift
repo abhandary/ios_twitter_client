@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     
+    let kShowUserTimeLineSegue = "showUserTimeLineSegue"
+    
     var svc : SFSafariViewController?
     
     override func viewDidLoad() {
@@ -36,9 +38,11 @@ class LoginViewController: UIViewController {
         let user = UserAccountManager.createUser()
 
         user.loginUser(success: { () in
-                self.svc?.dismiss(animated: true, completion: nil)
+                self.svc?.dismiss(animated: true, completion: { 
+                    self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
+                })
             }, error: { (error) in
-                self.svc?.dismiss(animated: true, completion: nil)                
+                self.svc?.dismiss(animated: true, completion: nil)
             }) { (requestTokenURL) in
                 self.receivedRequestToken(url: requestTokenURL)
         }

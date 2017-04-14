@@ -7,18 +7,18 @@
 //
 
 import Foundation
-import SafariServices
 
 
 class UserAccount {
     
     let loginService = UserLoginService()
+    var homeTimeLineService = UserTimeLineService()
     
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((NSError) -> Void)?
     
-    var svc : SFSafariViewController?
-    var homeStream : UserStreamService!
+
+    // MARK: - public routines
     
     func loginUser(success:@escaping((Void) -> Void),
                    error: @escaping((NSError) -> Void),
@@ -30,6 +30,7 @@ class UserAccount {
         // homeStream = UserStreamService()
         
         loginService.loginUser(success: { () in
+
             self.successCompletionHandler?()
             }, error: { (error) in
                 
@@ -39,8 +40,14 @@ class UserAccount {
         
     }
     
-    func receivedOauthToken(url: URL) {
-        self.loginService.receivedOauthToken(url: url)
+    func receivedOauthToken(url: URL, success: @escaping ((Void)->Void), error:@escaping ((Error)->Void)) {
+        self.loginService.receivedOauthToken(url: url, success: success, error: error)
+    }
+    
+    func fetchTweets(success: @escaping (([Tweet]) -> Void),
+                     error:@escaping ((Error) -> Void)) {
+        
+        homeTimeLineService.fetchTweets(success: success, error: error)
     }
 }
 

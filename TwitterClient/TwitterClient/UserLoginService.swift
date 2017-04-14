@@ -38,6 +38,7 @@ class UserLoginService {
         self.successCompletionHandler = success
         self.receivedRequestTokenHandler = receivedRequestToken
         
+        OAuthClient.sharedInstance.deauthorize()
         OAuthClient.sharedInstance.fetchRequestToken(withPath: kRequestTokenPath,
                                                        method: kRequestTokenMethod,
                                                        callbackURL: URL(string:kCallbackURL)!,
@@ -56,7 +57,9 @@ class UserLoginService {
     }
     
     
-    func receivedOauthToken(url: URL) {
+        func receivedOauthToken(url: URL,
+                                success: @escaping ((Void)->Void),
+                                error:@escaping ((Error)->Void)) {
         
         if let urlQuery = url.query {
             
@@ -66,10 +69,12 @@ class UserLoginService {
                                                           success: { (accessToken) in
                                                             OAuthClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
                                                             self.successCompletionHandler?()
+                                                            success()
                                                             
-                }, failure: { (error )  in
-                    print(error)
+                }, failure: { (receivedError )  in
+                    print(receivedError)
                     // self.errorCompletionHandler?(error)
+                    error(receivedError!);
             })
             
         }

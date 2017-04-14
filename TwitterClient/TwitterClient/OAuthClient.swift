@@ -9,14 +9,14 @@
 import Foundation
 import BDBOAuth1Manager
 
-let kTwitterConsumerKey = "nmO81pxwghuFjAjSwIjCoBO9s"
-let kTwitterConsumerSecret = "3TDgHVkIUnYN40DQwIwigo5iQk4xQhFSoeKbEZg9NdwPJWKsE8"
-let kTwitterBaseURL  = "https://api.twitter.com"
+let kOAuthConsumerKey = "nmO81pxwghuFjAjSwIjCoBO9s"
+let kOAuthConsumerSecret = "3TDgHVkIUnYN40DQwIwigo5iQk4xQhFSoeKbEZg9NdwPJWKsE8"
+let kOAuthBaseURL  = "https://api.twitter.com"
 
 
 class OAuthClient : BDBOAuth1SessionManager {
     
     
-   static let sharedInstance = OAuthClient(baseURL: URL(string: kTwitterBaseURL)!, consumerKey: kTwitterConsumerKey, consumerSecret: kTwitterConsumerSecret)!;
+   static let sharedInstance = OAuthClient(baseURL: URL(string: kOAuthBaseURL)!, consumerKey: kOAuthConsumerKey, consumerSecret: kOAuthConsumerSecret)!;
     
 }
