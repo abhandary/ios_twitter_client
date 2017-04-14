@@ -34,15 +34,19 @@ class LoginViewController: UIViewController {
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {
         let user = UserAccountManager.createUser()
-        user.delegate = self
+
         user.loginUser(success: { () in
-            print("success");
-            self.svc?.dismiss(animated: true, completion: nil);
-        }) { (error) in
-            print(error)
-            self.svc?.dismiss(animated: true, completion: nil);
+                self.svc?.dismiss(animated: true, completion: nil)
+            }, error: { (error) in
+                self.svc?.dismiss(animated: true, completion: nil)                
+            }) { (requestTokenURL) in
+                self.receivedRequestToken(url: requestTokenURL)
         }
-        
+    }
+    
+    func receivedRequestToken(url: URL) {
+        self.svc = SFSafariViewController(url: url)
+        self.present(self.svc!, animated: true, completion: nil);
     }
     
     @IBAction func prepareForUnwind(segue : UIStoryboardSegue) {
@@ -50,10 +54,4 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController : UserAccountDelegate {
-    func receivedRequestToken(url: URL) {
-        self.svc = SFSafariViewController(url: url)
-        self.present(self.svc!, animated: true, completion: nil);
-    }
-}
 

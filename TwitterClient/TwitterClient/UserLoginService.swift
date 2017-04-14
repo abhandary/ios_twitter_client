@@ -22,22 +22,21 @@ let kAccessTokenPath = "oauth/access_token"
 let kAccessTokenMethod = "POST"
 
 
-@objc protocol UserLoginServiceDelegate {
-    func receivedRequestToken(url : URL);
-}
 
 class UserLoginService {
     
-    weak var delegate: UserLoginServiceDelegate?
-    
     var errorCompletionHandler : ((NSError) -> Void)?
     var successCompletionHandler: ((Void) -> Void)?
+    var receivedRequestTokenHandler: ((URL) -> Void)?
     
     // MARK: - public routines
-    func loginUser(success:@escaping((Void) -> Void), error: @escaping((NSError) -> Void)) {
+    func loginUser(success:@escaping((Void) -> Void),
+                   error: @escaping((NSError) -> Void),
+                   receivedRequestToken: @escaping((URL) -> Void)) {
         
         self.errorCompletionHandler = error
         self.successCompletionHandler = success
+        self.receivedRequestTokenHandler = receivedRequestToken
         
         OAuthClient.sharedInstance.fetchRequestToken(withPath: kRequestTokenPath,
                                                        method: kRequestTokenMethod,
@@ -83,7 +82,7 @@ class UserLoginService {
         let authURL = OAuthClient.sharedInstance.baseURL!.absoluteString
         let fullURL = authURL + kAuthorizePath + "?\(kRequestTokenParam)=\(requestToken)"
         if let url = URL(string: fullURL) {
-            self.delegate?.receivedRequestToken(url: url)
+            self.receivedRequestTokenHandler?(url)
         } else {
             self.errorCompletionHandler?(NSError(domain: "Unable to form authorize URL", code: 0, userInfo: nil))
         }

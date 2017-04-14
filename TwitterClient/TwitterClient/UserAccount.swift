@@ -10,13 +10,7 @@ import Foundation
 import SafariServices
 
 
-@objc protocol UserAccountDelegate {
-    func receivedRequestToken(url : URL);
-}
-
 class UserAccount {
-    
-    weak var delegate : UserAccountDelegate?
     
     let loginService = UserLoginService()
     
@@ -26,18 +20,22 @@ class UserAccount {
     var svc : SFSafariViewController?
     var homeStream : UserStreamService!
     
-    func loginUser(success:@escaping((Void) -> Void), error: @escaping((NSError) -> Void)) {
+    func loginUser(success:@escaping((Void) -> Void),
+                   error: @escaping((NSError) -> Void),
+                   receivedRequestToken: @escaping((URL) -> Void)) {
+        
         successCompletionHandler = success
         errorCompletionHandler = error
         
         // homeStream = UserStreamService()
         
-        loginService.delegate = self
         loginService.loginUser(success: { () in
-                self.successCompletionHandler?()
-            }) { (error) in
+            self.successCompletionHandler?()
+            }, error: { (error) in
                 
-        }
+            }, receivedRequestToken: { (url) in
+                receivedRequestToken(url)
+        })
         
     }
     
@@ -46,10 +44,3 @@ class UserAccount {
     }
 }
 
-extension UserAccount : UserLoginServiceDelegate {
-    
-    func receivedRequestToken(url: URL) {
-        self.delegate?.receivedRequestToken(url: url)
-    }
-    
-}
