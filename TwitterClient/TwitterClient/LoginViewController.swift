@@ -38,9 +38,14 @@ class LoginViewController: UIViewController {
         let userAccount = UserAccountManager.createUserAccount()
 
         userAccount.loginUser(success: { () in
-                self.svc?.dismiss(animated: true, completion: { 
+            
+                if let svc = self.svc {
+                    svc.dismiss(animated: true, completion: {
+                        self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
+                    })
+                } else {
                     self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
-                })
+                }
             }, error: { (error) in
                 self.svc?.dismiss(animated: true, completion: nil)
             }) { (requestTokenURL) in

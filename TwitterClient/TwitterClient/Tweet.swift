@@ -19,7 +19,7 @@ class Tweet {
     
     static let dateFormatter = DateFormatter()
     
-    init(dictionary : [String : Any?]) {
+    init(dictionary : NSDictionary) {
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
@@ -33,14 +33,14 @@ class Tweet {
             timestamp = Tweet.dateFormatter.date(from: timestampString)
         }
         
-        if let userDict = dictionary["user"] as? [String : Any] {
+        if let userDict = dictionary["user"] as? NSDictionary {
             user = User(dictionary: userDict)
         }
         
         
     }
     
-    static func tweetsWithArray(dictionaries: [[String : Any?]]) -> [Tweet] {
+    static func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet] {
         return dictionaries.map { Tweet(dictionary: $0) }
     }
 }

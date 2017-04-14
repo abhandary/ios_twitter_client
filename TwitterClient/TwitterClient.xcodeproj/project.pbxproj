@@ -46,6 +46,7 @@
 		E2154E611EA0640B00C8CEF2 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		E2154E671EA07D0800C8CEF2 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		E2C7AE6E1EA0B74800B4384A /* TwitterClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwitterClient.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +99,7 @@
 		E2154E361E9F364400C8CEF2 /* TwitterClient */ = {
 			isa = PBXGroup;
 			children = (
+				E2C7AE6E1EA0B74800B4384A /* TwitterClient.entitlements */,
 				E2154E5E1EA0615C00C8CEF2 /* Models */,
 				E2154E4E1E9F481A00C8CEF2 /* Network Layer */,
 				E2154E4D1E9F47B000C8CEF2 /* Services Layer */,
@@ -193,7 +195,13 @@
 				TargetAttributes = {
 					E2154E331E9F364400C8CEF2 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = XAAMLLWD92;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -416,6 +424,8 @@
 			baseConfigurationReference = C923D09863555602D2949714 /* Pods-TwitterClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TwitterClient/TwitterClient.entitlements;
+				DEVELOPMENT_TEAM = XAAMLLWD92;
 				INFOPLIST_FILE = TwitterClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AkshayBhandary.TwitterClient;
@@ -430,6 +440,8 @@
 			baseConfigurationReference = 8441288084C2F0733D02F88F /* Pods-TwitterClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TwitterClient/TwitterClient.entitlements;
+				DEVELOPMENT_TEAM = XAAMLLWD92;
 				INFOPLIST_FILE = TwitterClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AkshayBhandary.TwitterClient;

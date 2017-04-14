@@ -17,9 +17,9 @@ class User  {
     var profileURL : URL?
     var tagline : String?
     
-    var dictionary : [String : Any]?
+    var dictionary : NSDictionary?
     
-    init(dictionary : [String : Any?]) {
+    init(dictionary : NSDictionary) {
         name = dictionary["name"] as? String
         screename = dictionary["screen_name"] as? String
         
@@ -29,7 +29,7 @@ class User  {
         
         tagline = dictionary["description"] as? String
         
-        self.dictionary = dictionary
+        self.dictionary = dictionary as NSDictionary
     }
  
     internal static var _currentUser : User?
@@ -41,22 +41,22 @@ class User  {
                 
                 if let userData = userData as? Data {
                     
-                    let dictionary = try! JSONSerialization.jsonObject(with: userData, options: JSONSerialization.ReadingOptions.allowFragments) as! [String : Any];
+                    let dictionary = try! JSONSerialization.jsonObject(with: userData, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary;
                     _currentUser = User(dictionary: dictionary)
                 }
             }
             return _currentUser
         }
         
-        set(user) {
+        set (user) {
             let defaults = UserDefaults.standard
             _currentUser = user
-            if _currentUser == nil {
-                defaults.removeObject(forKey: kCurrentUserData)
-            } else {
-                
-                let json = try! JSONSerialization.data(withJSONObject: _currentUser?.dictionary!, options: JSONSerialization.WritingOptions.prettyPrinted)
+            if let user = _currentUser {
+                let json = try! JSONSerialization.data(withJSONObject: user.dictionary!, options: JSONSerialization.WritingOptions.prettyPrinted)
                 defaults.set(json, forKey: kCurrentUserData)
+            } else {
+                defaults.removeObject(forKey: kCurrentUserData)
+                
             }
             
         }

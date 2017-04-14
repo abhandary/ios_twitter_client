@@ -25,7 +25,7 @@ class UserTimeLineService {
                                        parameters: nil,
                                        progress: nil,
                                        success: { (task, response) in
-                                            if let dictionaries = response as? [[String : Any]] {
+                                            if let dictionaries = response as? [NSDictionary] {
                                                 let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries);
                                                 success(tweets)
                                             } else {
@@ -42,7 +42,7 @@ class UserTimeLineService {
                                        parameters: nil,
                                        progress: nil,
                                        success: { (task, response) in
-                                        if let dictionary = response as? [String : Any] {
+                                        if let dictionary = response as? NSDictionary {
                                             let user = User(dictionary: dictionary)
                                             success(user)
                                         } else {
