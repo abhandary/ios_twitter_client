@@ -27,12 +27,15 @@ class TimeLineViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = 200
+        
         reloadTable()
         
     }
 
     func reloadTable() {
-        UserAccountManager.currentUser()?.fetchTweets(success: { (tweets) in
+        UserAccountManager.currentUserAccount()?.fetchTweets(success: { (tweets) in
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
@@ -70,7 +73,7 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
-        cell.textLabel?.text = self.tweets![indexPath.row].text
+        cell.tweet = self.tweets![indexPath.row]
         return cell
     }
 }

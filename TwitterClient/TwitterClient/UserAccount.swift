@@ -15,29 +15,42 @@ class UserAccount {
     var homeTimeLineService = UserTimeLineService()
     
     var successCompletionHandler : ((Void) -> Void)?
-    var errorCompletionHandler : ((NSError) -> Void)?
+    var errorCompletionHandler : ((Error) -> Void)?
     
 
     // MARK: - public routines
     
     func loginUser(success:@escaping((Void) -> Void),
-                   error: @escaping((NSError) -> Void),
+                   error: @escaping((Error) -> Void),
                    receivedRequestToken: @escaping((URL) -> Void)) {
         
         successCompletionHandler = success
         errorCompletionHandler = error
         
-        // homeStream = UserStreamService()
+        if User.currentUser != nil {
+            self.successCompletionHandler?()
+            return
+        }
         
         loginService.loginUser(success: { () in
-
-            self.successCompletionHandler?()
+            
+            self.homeTimeLineService.currentUser(success: { (user) in
+                User.currentUser = user
+                self.successCompletionHandler?()
+                }, error: { (receivedError) in
+                    self.errorCompletionHandler?(receivedError)
+                })
             }, error: { (error) in
                 
             }, receivedRequestToken: { (url) in
                 receivedRequestToken(url)
         })
         
+    }
+    
+    func logOutUser() {
+        loginService.logoutUser()
+        User.currentUser = nil
     }
     
     func receivedOauthToken(url: URL, success: @escaping ((Void)->Void), error:@escaping ((Error)->Void)) {

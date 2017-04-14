@@ -35,9 +35,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {
-        let user = UserAccountManager.createUser()
+        let userAccount = UserAccountManager.createUserAccount()
 
-        user.loginUser(success: { () in
+        userAccount.loginUser(success: { () in
                 self.svc?.dismiss(animated: true, completion: { 
                     self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
                 })

@@ -81,7 +81,9 @@ class UserLoginService {
 
     }
     
-    
+    func logoutUser() {
+        OAuthClient.sharedInstance.deauthorize()
+    }
     
     internal func received(requestToken : String) {
         let authURL = OAuthClient.sharedInstance.baseURL!.absoluteString

@@ -17,7 +17,7 @@ class UserAccountManager {
     
     static let sharedInstance = UserAccountManager()
     
-    static func createUser() -> UserAccount {
+    static func createUserAccount() -> UserAccount {
         let user = UserAccount()
         sharedInstance.addUserAccount(user: user)
         return user;
@@ -29,11 +29,11 @@ class UserAccountManager {
         }
     }
     
-    static func currentUser() -> UserAccount? {
-        return sharedInstance.currentUser()
+    static func currentUserAccount() -> UserAccount? {
+        return sharedInstance.currentUserAccount()
     }
     
-    func currentUser() -> UserAccount? {
+    func currentUserAccount() -> UserAccount? {
         var user : UserAccount? = nil
         serialQueue.sync {
             if self.userAccounts.count > 0 {

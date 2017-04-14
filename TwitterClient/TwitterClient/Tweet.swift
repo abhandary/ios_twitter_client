@@ -15,6 +15,8 @@ class Tweet {
     var retweetCount : Int?
     var favoritesCount : Int?
     
+    var user : User?
+    
     static let dateFormatter = DateFormatter()
     
     init(dictionary : [String : Any?]) {
@@ -30,6 +32,12 @@ class Tweet {
             Tweet.dateFormatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = Tweet.dateFormatter.date(from: timestampString)
         }
+        
+        if let userDict = dictionary["user"] as? [String : Any] {
+            user = User(dictionary: userDict)
+        }
+        
+        
     }
     
     static func tweetsWithArray(dictionaries: [[String : Any?]]) -> [Tweet] {
