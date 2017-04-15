@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="TwitterClient" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="TwitterClient" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -153,7 +153,8 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Did you know that you can tell if someone is a programmer simplying by saying the word &quot;timezones&quot; and seeing if they cringe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5M-ey-8WW">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5M-ey-8WW">
+                                                            <string key="text">Did you know that you can tell if someone is a programmer simplying by saying the word "timezones" and seeing if they cringe This is some more text and more and more and more and more and more and more and more</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -171,6 +172,7 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="chE-Sd-lqt"/>
                                                         <constraint firstItem="Q1T-mY-l34" firstAttribute="leading" secondItem="2b7-H1-Oh6" secondAttribute="trailing" constant="5" id="hDj-rV-IhL"/>
                                                         <constraint firstItem="Ax2-YT-qZg" firstAttribute="centerY" secondItem="2b7-H1-Oh6" secondAttribute="centerY" id="kg7-fv-3Cc"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Z5M-ey-8WW" secondAttribute="bottom" constant="3" id="mEK-cs-5Sh"/>
                                                         <constraint firstItem="Z5M-ey-8WW" firstAttribute="top" secondItem="2b7-H1-Oh6" secondAttribute="bottom" constant="14" id="meB-Z4-odx"/>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="nxX-IP-wcg"/>
                                                     </constraints>
@@ -262,6 +264,7 @@
                                             <outlet property="thumbNailImage" destination="a9q-DB-FUA" id="4Pd-85-1Rk"/>
                                             <outlet property="timeLabel" destination="Ax2-YT-qZg" id="VYz-Oq-ASB"/>
                                             <outlet property="tweetTextLabel" destination="Z5M-ey-8WW" id="otK-GB-CqR"/>
+                                            <segue destination="t5F-GD-LgP" kind="showDetail" identifier="tweetDetailSegue" id="aEO-5s-PVP"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RetweetCell" rowHeight="196" id="UtX-5S-crG" customClass="RetweetCell" customModule="TwitterClient" customModuleProvider="target">
@@ -324,6 +327,7 @@
                                                         <constraint firstItem="oq1-mB-tbI" firstAttribute="top" secondItem="h4G-jS-75m" secondAttribute="bottom" constant="14" id="Bk2-xP-Ro5"/>
                                                         <constraint firstItem="kBy-ct-hQS" firstAttribute="leading" secondItem="h4G-jS-75m" secondAttribute="trailing" constant="5" id="Cqe-qI-qBH"/>
                                                         <constraint firstItem="oq1-mB-tbI" firstAttribute="leading" secondItem="wDT-Cb-F6f" secondAttribute="leading" id="DTs-o8-BLR"/>
+                                                        <constraint firstAttribute="bottom" secondItem="oq1-mB-tbI" secondAttribute="bottom" id="KD2-Zl-rLr"/>
                                                         <constraint firstItem="tWa-cQ-lTh" firstAttribute="centerY" secondItem="h4G-jS-75m" secondAttribute="centerY" id="Tmr-Az-CNT"/>
                                                         <constraint firstAttribute="trailing" secondItem="tWa-cQ-lTh" secondAttribute="trailing" constant="5" id="uQQ-lN-fm5"/>
                                                         <constraint firstItem="kBy-ct-hQS" firstAttribute="centerY" secondItem="h4G-jS-75m" secondAttribute="centerY" id="vej-MN-lDz"/>
@@ -403,7 +407,7 @@
                                                 <constraint firstItem="qcf-sb-4M8" firstAttribute="leading" secondItem="FMs-fi-wfe" secondAttribute="leading" id="OeS-sQ-vGY"/>
                                                 <constraint firstItem="qcf-sb-4M8" firstAttribute="width" secondItem="FMs-fi-wfe" secondAttribute="width" multiplier="0.22" id="Vsl-0B-i8A"/>
                                                 <constraint firstAttribute="bottom" secondItem="fPc-zt-1IL" secondAttribute="bottom" id="XQs-0Y-XHi"/>
-                                                <constraint firstItem="wDT-Cb-F6f" firstAttribute="top" secondItem="B1U-LL-VCy" secondAttribute="bottom" priority="500" id="e5B-6V-wQG"/>
+                                                <constraint firstItem="wDT-Cb-F6f" firstAttribute="top" secondItem="B1U-LL-VCy" secondAttribute="bottom" id="e5B-6V-wQG"/>
                                                 <constraint firstAttribute="trailing" secondItem="wDT-Cb-F6f" secondAttribute="trailing" id="fKu-bA-2bC"/>
                                                 <constraint firstItem="wDT-Cb-F6f" firstAttribute="leading" secondItem="qcf-sb-4M8" secondAttribute="trailing" id="oCJ-Zg-dWT"/>
                                                 <constraint firstItem="B1U-LL-VCy" firstAttribute="leading" secondItem="FMs-fi-wfe" secondAttribute="leading" id="qHs-xB-r4D"/>
@@ -439,7 +443,18 @@
                             <constraint firstItem="4J9-ID-z13" firstAttribute="top" secondItem="N9T-m4-13k" secondAttribute="bottom" id="x5z-Xi-9Yi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="XEO-D1-zF0"/>
+                    <navigationItem key="navigationItem" id="XEO-D1-zF0">
+                        <barButtonItem key="leftBarButtonItem" image="logout" id="x6g-go-MNX">
+                            <connections>
+                                <action selector="logOutButtonPressed:" destination="jGq-2K-V01" id="SHZ-IC-Z0l"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="compose" id="3Hg-M3-UVW">
+                            <connections>
+                                <segue destination="SuH-WQ-N9K" kind="showDetail" identifier="tweetComposeSegue" id="2Mg-pS-hro"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="N9T-m4-13k" id="S0O-6i-QxW"/>
                     </connections>
@@ -447,6 +462,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWN-JS-oeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2388" y="456.52173913043481"/>
+        </scene>
+        <!--Tweet Detail View Controller-->
+        <scene sceneID="DlR-qS-wZ5">
+            <objects>
+                <viewController id="t5F-GD-LgP" customClass="TweetDetailViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pvb-Zs-401"/>
+                        <viewControllerLayoutGuide type="bottom" id="Glt-qs-fUi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u4f-SJ-h8i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B6M-9o-oS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3647" y="173"/>
+        </scene>
+        <!--Tweet Compose View Controller-->
+        <scene sceneID="jFr-Vp-psd">
+            <objects>
+                <viewController id="SuH-WQ-N9K" customClass="TweetComposeViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GEr-Co-3fY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xfp-hp-Pv1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NcN-JT-SeD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="izI-Og-9Mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3345" y="872"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VEf-gP-8qB">
@@ -468,7 +519,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="compose" width="22" height="22"/>
         <image name="favorite_icon" width="10" height="10"/>
+        <image name="logout" width="22" height="22"/>
         <image name="reply_icon" width="10" height="10"/>
         <image name="retweet_icon" width="10" height="10"/>
     </resources>

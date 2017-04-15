@@ -25,7 +25,7 @@ class Tweet {
     
     init(dictionary : NSDictionary) {
 
-        // print(dictionary)
+        print(dictionary)
         
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0

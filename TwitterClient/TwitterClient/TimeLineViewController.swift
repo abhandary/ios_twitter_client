@@ -8,9 +8,12 @@
 
 import UIKit
 
+let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
+let kTweetDetailSegue = "tweetDetailSegue"
+let kTweetComposeSegue = "tweetComposeSegue"
+
 class TimeLineViewController: UIViewController {
 
-    
     @IBOutlet weak var tableView: UITableView!
     
     var tweets : [Tweet]?
@@ -56,16 +59,26 @@ class TimeLineViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func logOutButtonPressed(_ sender: AnyObject) {
+        User.currentUser = nil
+        UserAccount.currentUserAccount = nil
+        
+        // currently only the AppDelegate listens to this notification, this is required because the current
+        // implementation swaps root view controllers. The use of delegates is not straightforward in this implementation
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kNotificationUserLoggedOut), object: self)
+    }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == kTweetDetailSegue,
+            let cell = sender as? UITableViewCell,
+            let detailVC = segue.destination as? TweetDetailViewController,
+            let indexPath = self.tableView.indexPath(for: cell) {
+            detailVC.tweet = self.tweets![indexPath.row]
+        }
     }
-    */
 }
 
 

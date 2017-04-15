@@ -57,16 +57,16 @@ class UserLoginService {
     }
     
     
-        func receivedOauthToken(url: URL,
-                                success: @escaping ((Void)->Void),
-                                error:@escaping ((Error)->Void)) {
+    func receivedOauthToken(url: URL,
+                            success: @escaping ((Void)->Void),
+                            error:@escaping ((Error)->Void)) {
         
         if let urlQuery = url.query {
             
             OAuthClient.sharedInstance.fetchAccessToken(withPath: kAccessTokenPath,
-                                                          method: kAccessTokenMethod,
-                                                          requestToken: BDBOAuth1Credential(queryString: urlQuery),
-                                                          success: { (accessToken) in
+                                                        method: kAccessTokenMethod,
+                                                        requestToken: BDBOAuth1Credential(queryString: urlQuery),
+                                                        success: { (accessToken) in
                                                             OAuthClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
                                                             self.successCompletionHandler?()
                                                             success()
@@ -78,7 +78,7 @@ class UserLoginService {
             })
             
         }
-
+        
     }
     
     func logoutUser() {

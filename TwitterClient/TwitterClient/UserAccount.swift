@@ -22,6 +22,9 @@ class UserAccount {
     static var _currentUserAccount : UserAccount?
     static var currentUserAccount : UserAccount? {
         set (userAccount) {
+            if userAccount == nil {
+                _currentUserAccount?.loginService.logoutUser()
+            }
             _currentUserAccount = userAccount
         }
         

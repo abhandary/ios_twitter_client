@@ -10,17 +10,23 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     var window: UIWindow?
 
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(userLoggedOut),
+                                               name: Notification.Name(rawValue: kNotificationUserLoggedOut),
+                                                object: nil);
         
         // Override point for customization after application launch.
         if let _ = User.currentUser {
-            let nvc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationViewController")
+            let nvc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationViewController") as! UINavigationController
             window?.rootViewController = nvc
         }
         return true
@@ -102,6 +108,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    // TimeLineViewControllerDelegate
+    func userLoggedOut(notification : Notification) {
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        window?.rootViewController = loginVC
     }
 
 }

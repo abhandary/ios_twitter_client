@@ -23,6 +23,8 @@
 		E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */; };
 		E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E671EA07D0800C8CEF2 /* TweetCell.swift */; };
 		E2C7AE701EA1814D00B4384A /* RetweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */; };
+		E2C7AE721EA1976D00B4384A /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */; };
+		E2C7AE741EA1977800B4384A /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		E2154E671EA07D0800C8CEF2 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		E2C7AE6E1EA0B74800B4384A /* TwitterClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwitterClient.entitlements; sourceTree = "<group>"; };
 		E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetCell.swift; sourceTree = "<group>"; };
+		E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
+		E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 				E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */,
 				E2154E671EA07D0800C8CEF2 /* TweetCell.swift */,
 				E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */,
+				E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */,
+				E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */,
 			);
 			name = "UI Layer";
 			sourceTree = "<group>";
@@ -294,8 +300,10 @@
 				E2154E621EA0640B00C8CEF2 /* Tweet.swift in Sources */,
 				E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */,
 				E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */,
+				E2C7AE741EA1977800B4384A /* TweetDetailViewController.swift in Sources */,
 				E2154E401E9F364400C8CEF2 /* TwitterClient.xcdatamodeld in Sources */,
 				E2154E3A1E9F364400C8CEF2 /* LoginViewController.swift in Sources */,
+				E2C7AE721EA1976D00B4384A /* TweetComposeViewController.swift in Sources */,
 				E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */,
 				E2154E601EA0619E00C8CEF2 /* User.swift in Sources */,
 				E2154E381E9F364400C8CEF2 /* AppDelegate.swift in Sources */,
