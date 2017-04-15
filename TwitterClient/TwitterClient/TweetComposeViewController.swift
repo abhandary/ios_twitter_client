@@ -8,11 +8,15 @@
 
 import UIKit
 
-let kUnwindToTimeLineViewSegue = "unwindToTimeLineView"
+
 
 class TweetComposeViewController: UIViewController {
+
+    static let kUnwindToTimeLineViewSegue = "unwindToTimeLineView"
     
     var user : User?
+    
+    var postedTweet : Tweet?
     
     @IBOutlet weak var tweetEntryTextField: UITextView!
     @IBOutlet weak var thumbNailImageLabel: UIImageView!
@@ -44,6 +48,19 @@ class TweetComposeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func tweetButtonTapped(_ sender: AnyObject) {
+        
+        if let tweetText = self.tweetEntryTextField.text {
+            let statusUpdate = StatusUpdate(tweetText)
+            UserAccount.currentUserAccount?.post(statusUpdate: statusUpdate, success: { (tweet) in
+                    self.postedTweet = tweet
+                    self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
+                }, error: { (error) in
+                    // @todo: show error banner
+            })
+        
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

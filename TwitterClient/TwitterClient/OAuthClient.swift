@@ -9,8 +9,8 @@
 import Foundation
 import BDBOAuth1Manager
 
-let kOAuthConsumerKey = "nmO81pxwghuFjAjSwIjCoBO9s"
-let kOAuthConsumerSecret = "3TDgHVkIUnYN40DQwIwigo5iQk4xQhFSoeKbEZg9NdwPJWKsE8"
+let kOAuthConsumerKey = "J6JgATLMYpA2LaIMNVEk8xkqo"
+let kOAuthConsumerSecret = "29redeM6uFMjJVyCIPTno7w7V8ssclzb9xor6gontHIkQnbyoO"
 let kOAuthBaseURL  = "https://api.twitter.com"
 
 

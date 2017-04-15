@@ -168,7 +168,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="Ax2-YT-qZg" secondAttribute="trailing" constant="8" id="7Ch-gW-TJ1"/>
                                                         <constraint firstItem="Ax2-YT-qZg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q1T-mY-l34" secondAttribute="trailing" constant="8" id="Ycg-Nm-ZNF"/>
                                                         <constraint firstItem="Q1T-mY-l34" firstAttribute="centerY" secondItem="2b7-H1-Oh6" secondAttribute="centerY" id="ZAP-6r-hVu"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="chE-Sd-lqt"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="chE-Sd-lqt"/>
                                                         <constraint firstItem="Q1T-mY-l34" firstAttribute="leading" secondItem="2b7-H1-Oh6" secondAttribute="trailing" constant="5" id="hDj-rV-IhL"/>
                                                         <constraint firstItem="Ax2-YT-qZg" firstAttribute="centerY" secondItem="2b7-H1-Oh6" secondAttribute="centerY" id="kg7-fv-3Cc"/>
                                                         <constraint firstAttribute="bottom" secondItem="Z5M-ey-8WW" secondAttribute="bottom" constant="3" id="mEK-cs-5Sh"/>
@@ -180,14 +180,14 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a9q-DB-FUA">
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="lxP-MX-1kK"/>
-                                                                <constraint firstAttribute="width" constant="60" id="u25-YY-I9b"/>
+                                                                <constraint firstAttribute="height" constant="45" id="lxP-MX-1kK"/>
+                                                                <constraint firstAttribute="width" constant="45" id="u25-YY-I9b"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="a9q-DB-FUA" firstAttribute="leading" secondItem="y6v-hB-ojS" secondAttribute="leading" constant="8" id="Drp-Jc-tBP"/>
+                                                        <constraint firstItem="a9q-DB-FUA" firstAttribute="centerX" secondItem="y6v-hB-ojS" secondAttribute="centerX" id="O5Y-7u-iAw"/>
                                                         <constraint firstItem="a9q-DB-FUA" firstAttribute="top" secondItem="y6v-hB-ojS" secondAttribute="top" constant="15" id="S5d-gw-OEs"/>
                                                     </constraints>
                                                 </view>
@@ -248,7 +248,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="d0p-IT-VUP" secondAttribute="trailing" id="nb7-As-bWx"/>
                                                 <constraint firstItem="44t-eY-dWQ" firstAttribute="leading" secondItem="y6v-hB-ojS" secondAttribute="trailing" id="ogf-GK-rz2"/>
                                                 <constraint firstItem="d0p-IT-VUP" firstAttribute="leading" secondItem="y6v-hB-ojS" secondAttribute="trailing" id="s47-MN-aUc"/>
-                                                <constraint firstItem="y6v-hB-ojS" firstAttribute="width" secondItem="0Zk-5t-FEG" secondAttribute="width" multiplier="0.22" id="vq7-0K-Bhd"/>
+                                                <constraint firstItem="y6v-hB-ojS" firstAttribute="width" secondItem="0Zk-5t-FEG" secondAttribute="width" multiplier="0.18" id="vq7-0K-Bhd"/>
                                                 <constraint firstAttribute="trailing" secondItem="44t-eY-dWQ" secondAttribute="trailing" id="xUh-zC-hSk"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -298,7 +298,7 @@
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDT-Cb-F6f" userLabel="Name and Text View">
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Michael Moran" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4G-jS-75m">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Michael Moran" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4G-jS-75m">
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -448,7 +448,7 @@
                                 <action selector="logOutButtonPressed:" destination="jGq-2K-V01" id="SHZ-IC-Z0l"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="compose" id="3Hg-M3-UVW">
+                        <barButtonItem key="rightBarButtonItem" image="compose" id="3Hg-M3-UVW">
                             <connections>
                                 <segue destination="NC6-Ny-UKg" kind="show" identifier="tweetComposeSegue" action="showDetailViewController:sender:" id="2Mg-pS-hro"/>
                             </connections>
@@ -706,7 +706,11 @@
                                 <segue destination="fam-6Y-WZD" kind="unwind" identifier="unwindToTimeLineView" unwindAction="prepareForUnwindWithSegue:" id="z8M-5c-8x7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="e4v-mx-Lgz"/>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="e4v-mx-Lgz">
+                            <connections>
+                                <action selector="tweetButtonTapped:" destination="SuH-WQ-N9K" id="9L7-qq-z8a"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="countdownLabel" destination="A4q-Bo-g3w" id="cR7-yL-gJT"/>

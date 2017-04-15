@@ -8,12 +8,15 @@
 
 import UIKit
 
-let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
-let kTweetDetailSegue = "tweetDetailSegue"
-let kTweetComposeSegue = "tweetComposeSegue"
 
 class TimeLineViewController: UIViewController {
 
+    
+    static let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
+    let kTweetDetailSegue = "tweetDetailSegue"
+    let kTweetComposeSegue = "tweetComposeSegue"
+
+    
     @IBOutlet weak var tableView: UITableView!
     
     var tweets : [Tweet]?
@@ -65,13 +68,18 @@ class TimeLineViewController: UIViewController {
         
         // currently only the AppDelegate listens to this notification, this is required because the current
         // implementation swaps root view controllers. The use of delegates is not straightforward in this implementation
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kNotificationUserLoggedOut), object: self)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: TimeLineViewController.kNotificationUserLoggedOut), object: self)
     }
 
     // MARK: - Navigation
-
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
+        if segue.identifier! == TweetComposeViewController.kUnwindToTimeLineViewSegue {
+            if let composeVC = segue.source as? TweetComposeViewController,
+                let postedTweet = composeVC.postedTweet {
+                self.tweets?.insert(postedTweet, at: 0)
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -87,5 +87,9 @@ class UserAccount {
         homeTimeLineService.fetchTweetsOlderThanLastFetch(success: success, error: error)
     }
 
+    
+    func post(statusUpdate : StatusUpdate,  success: @escaping ((Tweet)->()), error:@escaping ((Error)->Void)) {
+        homeTimeLineService.post(statusUpdate: statusUpdate, success: success, error: error)
+    }
 }
 

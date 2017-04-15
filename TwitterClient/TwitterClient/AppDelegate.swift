@@ -12,6 +12,10 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
 
+    let kTweetsNavigationViewController = "TweetsNavigationViewController"
+    let kLoginViewController = "LoginViewController"
+    
+    
     var window: UIWindow?
 
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -21,13 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(userLoggedOut),
-                                               name: Notification.Name(rawValue: kNotificationUserLoggedOut),
+                                               name: Notification.Name(rawValue: TimeLineViewController.kNotificationUserLoggedOut),
                                                 object: nil);
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(userLoggedIn),
+                                               name: Notification.Name(rawValue: LoginViewController.kNotificationUserLoggedIn),
+                                               object: nil);
+
         
         // Override point for customization after application launch.
         if let _ = User.currentUser {
-            let nvc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationViewController") as! UINavigationController
-            window?.rootViewController = nvc
+            userLoggedIn()
         }
         return true
     }
@@ -112,9 +121,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     // TimeLineViewControllerDelegate
     func userLoggedOut(notification : Notification) {
-        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        let loginVC = storyboard.instantiateViewController(withIdentifier: kLoginViewController)
         window?.rootViewController = loginVC
     }
-
+    
+    func userLoggedIn() {
+        let nvc = storyboard.instantiateViewController(withIdentifier: kTweetsNavigationViewController) as! UINavigationController
+        window?.rootViewController = nvc
+    }
+    
 }
 

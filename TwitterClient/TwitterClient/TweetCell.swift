@@ -35,12 +35,11 @@ class TweetCell: UITableViewCell {
     var tweet : Tweet! {
         didSet {
             
+            // tweet text
             tweetTextLabel.text = tweet.text
-            // tweetTextLabel.sizeToFit()
             
-            // user info
+            // user name and screenname
             name.text = tweet.user?.name
-            
             if let screenname = tweet.user?.screename {
                 handle.text = "@\(screenname)"
             }
@@ -69,21 +68,23 @@ class TweetCell: UITableViewCell {
                         print(error)
                 })
                 
+                // likes count
                 if let likes = user.favoritesCount {
                     favoriteLabel.text = String(likes)
                 }
             }
             
  
-            // retweet
+            // retweet count
             retweetCountLabel.text = String(tweet.retweetCount!)
 
-            // favorite
-
-            
-            // @todo: set the timestamp label
+            // time label
+            timeLabel.text = tweet.timeString()
         }
     }
+    
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

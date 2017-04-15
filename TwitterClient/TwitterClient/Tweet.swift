@@ -13,9 +13,10 @@ class Tweet {
     
     var tweetID : Int?
     var text : String?
-    var timestamp : Date?
+    var tweetDate : Date?
     var retweetCount : Int?
 
+    let kMonthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
     var retweeted : Bool?
     
@@ -25,19 +26,15 @@ class Tweet {
     
     init(dictionary : NSDictionary) {
 
-        print(dictionary)
-        
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
 
-        
-        
         let timestampString = dictionary["created_at"] as? String
         
         if let timestampString = timestampString {
             
             Tweet.dateFormatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-            timestamp = Tweet.dateFormatter.date(from: timestampString)
+            tweetDate = Tweet.dateFormatter.date(from: timestampString)
         }
         
         if let userDict = dictionary["user"] as? NSDictionary {
@@ -47,7 +44,45 @@ class Tweet {
         if let id = dictionary["id"] as? Int {
             tweetID = id
         }
+    }
+    
+    func timeString() -> String {
         
+        guard tweetDate != nil else { return "" }
+        
+        var qualifiedTime = ""
+        let now = Date()
+        
+        let calendar = Calendar.current
+        let today     = calendar.component(.day, from: now)
+        
+        let tweetMonth = calendar.component(.month, from: tweetDate!)
+        let tweetDay   = calendar.component(.day, from: tweetDate!)
+        
+        if user!.screename! == "axa_bhandary" {
+            print(tweetDate)
+            print(now)
+        }
+        // if this tweet wasn't today, then return label as "MMM d"
+        if tweetDay != today {
+            qualifiedTime = "\(kMonthsOfYear[tweetMonth + 1]) \(tweetDay)"
+            return qualifiedTime
+        }
+
+        // tweet was posted today, return the appropriate minutes or hours ago
+        if let tweetDate = tweetDate {
+           let time = Int(now.timeIntervalSince(tweetDate))
+            if time < 60 {
+                qualifiedTime = "\(time)s"
+            } else if time < 60 * 60 {
+                let mins = time / 60
+                qualifiedTime = "\(mins)m"
+            } else {
+                let hours = time / (60 * 60)
+                qualifiedTime = "\(hours)h"
+            }
+        }
+        return qualifiedTime
     }
     
     static func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet] {

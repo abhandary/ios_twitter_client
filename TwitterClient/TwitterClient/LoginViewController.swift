@@ -9,11 +9,14 @@
 import UIKit
 import SafariServices
 
+
+
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
-    
+
+    static let kNotificationUserLoggedIn = "kNotificationUserLoggedIn"
     let kShowUserTimeLineSegue = "showUserTimeLineSegue"
     
     var svc : SFSafariViewController?
@@ -40,10 +43,12 @@ class LoginViewController: UIViewController {
             
                 if let svc = self.svc {
                     svc.dismiss(animated: true, completion: {
-                        self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
+                        // self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: LoginViewController.kNotificationUserLoggedIn), object: self)
                     })
                 } else {
-                    self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
+                    // self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: LoginViewController.kNotificationUserLoggedIn), object: self)
                 }
             }, error: { (error) in
                 self.svc?.dismiss(animated: true, completion: nil)
