@@ -68,6 +68,10 @@ class TweetCell: UITableViewCell {
                     }, failure: { (request, response, error) in
                         print(error)
                 })
+                
+                if let likes = user.favoritesCount {
+                    favoriteLabel.text = String(likes)
+                }
             }
             
  
@@ -75,7 +79,7 @@ class TweetCell: UITableViewCell {
             retweetCountLabel.text = String(tweet.retweetCount!)
 
             // favorite
-            favoriteLabel.text = String(tweet.favoritesCount!)
+
             
             // @todo: set the timestamp label
         }

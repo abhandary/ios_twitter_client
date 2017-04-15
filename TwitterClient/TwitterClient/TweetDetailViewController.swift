@@ -37,7 +37,12 @@ class TweetDetailViewController: UIViewController {
                 if let imageURL = user.profileURL {
                     thumbNailImage.setImageWith(imageURL)
                 }
-                
+
+                // likes
+                if let  likes = user.favoritesCount {
+                    numberOfLikesLabel.text = String(likes)
+                }
+
                 // user name and handle
                 name.text = user.name
                 screenName.text = user.screename
@@ -47,9 +52,6 @@ class TweetDetailViewController: UIViewController {
             tweetText.text = tweet.text
             
             // likes count
-            if let  likes = tweet.favoritesCount {
-                numberOfLikesLabel.text = String(likes)
-            }
             
             // retweets count
             if let retweetsCount = tweet.retweetCount {

@@ -104,7 +104,6 @@
                     <connections>
                         <outlet property="signInButton" destination="tH1-TA-Avq" id="ist-jP-lfI"/>
                         <outlet property="signUpButton" destination="fAF-Q4-KY3" id="Zc3-mQ-kAn"/>
-                        <segue destination="aCV-cs-5PG" kind="showDetail" identifier="showUserTimeLineSegue" action="showViewController:sender:" id="eYL-Si-38Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -172,7 +171,7 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="chE-Sd-lqt"/>
                                                         <constraint firstItem="Q1T-mY-l34" firstAttribute="leading" secondItem="2b7-H1-Oh6" secondAttribute="trailing" constant="5" id="hDj-rV-IhL"/>
                                                         <constraint firstItem="Ax2-YT-qZg" firstAttribute="centerY" secondItem="2b7-H1-Oh6" secondAttribute="centerY" id="kg7-fv-3Cc"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Z5M-ey-8WW" secondAttribute="bottom" constant="3" id="mEK-cs-5Sh"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Z5M-ey-8WW" secondAttribute="bottom" constant="3" id="mEK-cs-5Sh"/>
                                                         <constraint firstItem="Z5M-ey-8WW" firstAttribute="top" secondItem="2b7-H1-Oh6" secondAttribute="bottom" constant="14" id="meB-Z4-odx"/>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="nxX-IP-wcg"/>
                                                     </constraints>
@@ -264,7 +263,7 @@
                                             <outlet property="thumbNailImage" destination="a9q-DB-FUA" id="4Pd-85-1Rk"/>
                                             <outlet property="timeLabel" destination="Ax2-YT-qZg" id="VYz-Oq-ASB"/>
                                             <outlet property="tweetTextLabel" destination="Z5M-ey-8WW" id="otK-GB-CqR"/>
-                                            <segue destination="t5F-GD-LgP" kind="show" identifier="tweetDetailSegue" action="showDetailViewController:sender:" id="aEO-5s-PVP"/>
+                                            <segue destination="t5F-GD-LgP" kind="show" identifier="tweetDetailSegue" id="Pcj-Zy-6Tn"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RetweetCell" rowHeight="196" id="UtX-5S-crG" customClass="RetweetCell" customModule="TwitterClient" customModuleProvider="target">
@@ -472,7 +471,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Glt-qs-fUi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="u4f-SJ-h8i">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJM-bp-wwy" userLabel="Image and Name View">
@@ -627,6 +626,7 @@
                             <constraint firstItem="MJM-bp-wwy" firstAttribute="height" secondItem="u4f-SJ-h8i" secondAttribute="height" multiplier="0.15" id="zya-1l-KVT"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="favoritesImageView" destination="wcf-iR-GVU" id="n0y-ab-QMI"/>
                         <outlet property="name" destination="EeA-xK-mCO" id="Tuh-th-fCh"/>

@@ -15,7 +15,7 @@ class Tweet {
     var text : String?
     var timestamp : Date?
     var retweetCount : Int?
-    var favoritesCount : Int?
+
     
     var retweeted : Bool?
     
@@ -29,7 +29,7 @@ class Tweet {
         
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
-        favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
+
         
         
         let timestampString = dictionary["created_at"] as? String
