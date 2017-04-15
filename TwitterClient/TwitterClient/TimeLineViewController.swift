@@ -70,6 +70,10 @@ class TimeLineViewController: UIViewController {
 
     // MARK: - Navigation
 
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == kTweetDetailSegue,
@@ -77,7 +81,7 @@ class TimeLineViewController: UIViewController {
             let detailVC = segue.destination as? TweetDetailViewController,
             let indexPath = self.tableView.indexPath(for: cell) {
             detailVC.tweet = self.tweets![indexPath.row]
-        }
+        } 
     }
 }
 
