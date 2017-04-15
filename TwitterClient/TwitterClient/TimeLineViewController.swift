@@ -80,6 +80,7 @@ class TimeLineViewController: UIViewController {
             let cell = sender as? UITableViewCell,
             let detailVC = segue.destination as? TweetDetailViewController,
             let indexPath = self.tableView.indexPath(for: cell) {
+            self.tableView.deselectRow(at: indexPath, animated: true)
             detailVC.tweet = self.tweets![indexPath.row]
         } 
     }
