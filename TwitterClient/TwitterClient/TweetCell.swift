@@ -76,7 +76,8 @@ class TweetCell: UITableViewCell {
 
             // favorite
             favoriteLabel.text = String(tweet.favoritesCount!)
-        
+            
+            // @todo: set the timestamp label
         }
     }
     
