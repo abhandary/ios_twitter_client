@@ -759,7 +759,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="closeX" width="33" height="33"/>
+        <image name="closeX" width="22" height="22"/>
         <image name="compose" width="22" height="22"/>
         <image name="favorite_icon" width="10" height="10"/>
         <image name="logout" width="22" height="22"/>
