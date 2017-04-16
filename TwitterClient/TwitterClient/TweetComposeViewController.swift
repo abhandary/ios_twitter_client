@@ -15,7 +15,7 @@ class TweetComposeViewController: UIViewController {
     static let kUnwindToTimeLineViewSegue = "unwindToTimeLineView"
     
     var user : User?
-    
+    var inReplyToID : Int?
     var postedTweet : Tweet?
     
     @IBOutlet weak var tweetEntryTextField: UITextView!
@@ -37,10 +37,15 @@ class TweetComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        replyingToScreename.isHidden = true
-        replyingToLabel.isHidden = true
-        tweetEntryVerticalDistanceToThumbnailImageConstraint.constant = 20
-        
+        if let _ = inReplyToID {
+            replyingToScreename.isHidden = false
+            replyingToLabel.isHidden = false
+            tweetEntryVerticalDistanceToThumbnailImageConstraint.constant = 50
+        } else {
+            replyingToScreename.isHidden = true
+            replyingToLabel.isHidden = true
+            tweetEntryVerticalDistanceToThumbnailImageConstraint.constant = 20
+        }
         if let user = User.currentUser {
             if let profileURL = user.profileURL {
                 thumbNailImageLabel.setImageWith(profileURL)
@@ -58,16 +63,24 @@ class TweetComposeViewController: UIViewController {
     }
 
     @IBAction func tweetButtonTapped(_ sender: AnyObject) {
+
         
         if let tweetText = self.tweetEntryTextField.text {
-            
-            UserAccount.currentUserAccount?.post(statusUpdate: tweetText, success: { (tweet) in
-                    self.postedTweet = tweet
-                    self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
-                }, error: { (error) in
-                    // @todo: show error banner
-            })
         
+            let successBlock : (Tweet)->() = { (receivedTweet) in
+                self.postedTweet = receivedTweet
+                self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
+            }
+            
+            let errorBlock : (Error)->() = { (error) in
+                // @todo: show error banner
+            }
+
+            if let inReplyToID = inReplyToID {
+                UserAccount.currentUserAccount?.post(statusUpdate: tweetText, inReplyTo: inReplyToID, success: successBlock, error: errorBlock)
+            } else {
+                UserAccount.currentUserAccount?.post(statusUpdate: tweetText, success: successBlock, error: errorBlock)
+            }
         }
     }
     

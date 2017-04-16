@@ -92,7 +92,7 @@ class UserAccount {
         homeTimeLineService.post(statusUpdate: statusUpdate, success: success, error: error)
     }
     
-    func post(statusUpdate : String, inReplyTo: String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+    func post(statusUpdate : String, inReplyTo: Int, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         homeTimeLineService.post(statusUpdate: statusUpdate, inReplyTo: inReplyTo, success: success, error: error)
     }
     

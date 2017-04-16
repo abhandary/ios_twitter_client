@@ -456,6 +456,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="N9T-m4-13k" id="S0O-6i-QxW"/>
+                        <segue destination="NC6-Ny-UKg" kind="showDetail" identifier="tweetReplySegue" id="axH-Rw-TLv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWN-JS-oeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -788,4 +789,7 @@
         <image name="reply_icon" width="10" height="10"/>
         <image name="retweet_icon" width="10" height="10"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="axH-Rw-TLv"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -15,13 +15,13 @@ class TimeLineViewController: UIViewController  {
     static let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
     let kTweetDetailSegue = "tweetDetailSegue"
     let kTweetComposeSegue = "tweetComposeSegue"
-
+    let kTweetReplySegue = "tweetReplySegue"
     
     @IBOutlet weak var tableView: UITableView!
     
     var tweets : [Tweet]?
     var refreshControl : UIRefreshControl!
-    
+
  
     // for table view infiite scrolling
     var isMoreDataLoading = false
@@ -91,7 +91,14 @@ class TimeLineViewController: UIViewController  {
             self.tableView.deselectRow(at: indexPath, animated: true)
             detailVC.tweet = self.tweets![indexPath.row]
             detailVC.tweetCell = cell
-        } 
+        } else if segue.identifier == kTweetReplySegue,
+            let cell = sender as? TweetCell,
+            let navVC = segue.destination as? UINavigationController,
+            let composeVC = navVC.topViewController as? TweetComposeViewController,
+            let tweetID = cell.tweet.tweetID {
+            
+            composeVC.inReplyToID = tweetID
+        }
     }
 }
 
@@ -138,13 +145,16 @@ extension TimeLineViewController : TweetCellDelegate {
                 // @todo: show error banner
             }
 
-            
             if sender.tweet.favorited! == true {
                 UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success:successBlock, error: errorBlock)
             } else {
                 UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: successBlock, error:errorBlock)
             }
         }
+    }
+    
+    func replyTapped(sender: TweetCell) {
+        self.performSegue(withIdentifier: kTweetReplySegue, sender: sender)
     }
 }
 

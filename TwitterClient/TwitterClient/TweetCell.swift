@@ -11,6 +11,7 @@ import UIKit
 @objc protocol TweetCellDelegate {
     func retweetTapped(sender : TweetCell)
     func favoriteTapped(sender : TweetCell)
+    func replyTapped(sender : TweetCell)
 }
 
 class TweetCell: UITableViewCell {
@@ -100,12 +101,21 @@ class TweetCell: UITableViewCell {
         let favoriteTapGS = UITapGestureRecognizer(target: self, action: #selector(favoriteTapped))
         self.favoriteImage.isUserInteractionEnabled = true
         self.favoriteImage?.addGestureRecognizer(favoriteTapGS)
+        
+        let replyTapGS = UITapGestureRecognizer(target: self, action: #selector(replyTapped))
+        self.replyImageView.isUserInteractionEnabled = true
+        self.replyImageView?.addGestureRecognizer(replyTapGS)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    
+    func replyTapped() {
+        self.delegate?.replyTapped(sender: self)
     }
     
     func retweetTapped() {

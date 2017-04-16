@@ -77,8 +77,11 @@ class UserTimeLineService {
         postStatusUpdate(params: params, success: success, error: error)
     }
 
-    func post(statusUpdate : String, inReplyTo: String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        let params = ["status" : statusUpdate]
+    func post(statusUpdate : String, inReplyTo: Int, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        let params : [String : Any] = ["status" : statusUpdate,
+                      "in_reply_to_status_id" : inReplyTo
+                      ]
+        
         postStatusUpdate(params: params, success: success, error: error)
     }
 
