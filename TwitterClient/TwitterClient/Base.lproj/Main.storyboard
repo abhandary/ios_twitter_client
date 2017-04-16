@@ -195,11 +195,11 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Wlp-lX-4z0">
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="0vT-lu-sNQ"/>
-                                                                <constraint firstAttribute="width" constant="20" id="tyF-O7-W13"/>
+                                                                <constraint firstAttribute="height" constant="17" id="0vT-lu-sNQ"/>
+                                                                <constraint firstAttribute="width" constant="15" id="tyF-O7-W13"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z89-bA-oIt">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notretweeted" translatesAutoresizingMaskIntoConstraints="NO" id="z89-bA-oIt">
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="15" id="93B-qU-qRs"/>
                                                                 <constraint firstAttribute="height" constant="15" id="TJe-dp-6fe"/>
@@ -210,7 +210,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_icon" translatesAutoresizingMaskIntoConstraints="NO" id="X6T-bw-rf7">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unfavorite_heart" translatesAutoresizingMaskIntoConstraints="NO" id="X6T-bw-rf7">
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="UsI-6i-w30"/>
                                                                 <constraint firstAttribute="width" constant="18" id="tUq-yr-4cC"/>
@@ -225,7 +225,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="tKB-Dd-YwS" firstAttribute="centerY" secondItem="44t-eY-dWQ" secondAttribute="centerY" id="3a1-4H-N2z"/>
-                                                        <constraint firstItem="Wlp-lX-4z0" firstAttribute="leading" secondItem="44t-eY-dWQ" secondAttribute="leading" constant="20" id="3ap-wp-3Pa"/>
+                                                        <constraint firstItem="Wlp-lX-4z0" firstAttribute="leading" secondItem="44t-eY-dWQ" secondAttribute="leading" constant="15" id="3ap-wp-3Pa"/>
                                                         <constraint firstItem="inj-0u-NcN" firstAttribute="leading" secondItem="z89-bA-oIt" secondAttribute="trailing" constant="10" id="AYO-iH-YQl"/>
                                                         <constraint firstItem="X6T-bw-rf7" firstAttribute="leading" secondItem="inj-0u-NcN" secondAttribute="trailing" constant="40" id="BgT-uk-0Yk"/>
                                                         <constraint firstItem="tKB-Dd-YwS" firstAttribute="leading" secondItem="X6T-bw-rf7" secondAttribute="trailing" constant="10" id="EF9-hV-C1W"/>
@@ -786,8 +786,10 @@
         <image name="compose" width="22" height="22"/>
         <image name="favorite_icon" width="10" height="10"/>
         <image name="logout" width="19" height="19"/>
-        <image name="reply_icon" width="10" height="10"/>
+        <image name="notretweeted" width="15" height="10"/>
+        <image name="reply_icon" width="16" height="14"/>
         <image name="retweet_icon" width="10" height="10"/>
+        <image name="unfavorite_heart" width="11" height="8"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="axH-Rw-TLv"/>
