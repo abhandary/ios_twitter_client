@@ -10,6 +10,15 @@ import UIKit
 
 class TweetDetailViewController: UIViewController {
 
+    let kFavoritedImage = "favorite_heart"
+    let kUnfavoritedImage = "unfavorite_heart"
+    
+    let kRetweetedImage = "retweeted"
+    let kNotRetweetedImage = "notretweeted"
+    
+    let kTweetReplyFromDetailSegue = "tweetReplyFromDetailSegue"
+
+    
     var tweet : Tweet?
     
     var tweetCell : TweetCell?
@@ -49,16 +58,19 @@ class TweetDetailViewController: UIViewController {
             if let  likes = tweet.favoritesCount {
                 numberOfLikesLabel.text = String(likes)
             }
+            updateFavoritesImage()
 
-            // tweet text
-            tweetText.text = tweet.text
             
-            // likes count
             
             // retweets count
             if let retweetsCount = tweet.retweetCount {
                 numberOfRetweetsLabel.text = String(retweetsCount)
             }
+            updateRetweetImage()
+            
+            // tweet text
+            tweetText.text = tweet.text
+            
             
             // @todo: set the date
             
@@ -79,7 +91,7 @@ class TweetDetailViewController: UIViewController {
     }
 
     func replyImageTapped() {
-        print("replyImageTapped")
+        self.performSegue(withIdentifier: kTweetReplyFromDetailSegue, sender: self)
     }
 
     func retweetImageTapped() {
@@ -90,6 +102,7 @@ class TweetDetailViewController: UIViewController {
             let successBlock : (Tweet) -> () = { (receivedTweet)  in
                 tweet.updateWith(tweet: receivedTweet)
                 self.updateRetweetCountDisplay()
+                self.updateRetweetImage()
             }
             
             let errorBlock : (Error)->() = { (error) in
@@ -106,6 +119,7 @@ class TweetDetailViewController: UIViewController {
                     errorBlock(NSError(domain: "No original ID in retweet", code: 0, userInfo: nil))
                 }
             }
+
         }
     }
 
@@ -116,6 +130,7 @@ class TweetDetailViewController: UIViewController {
             let successBlock : (Tweet) -> () = { (receivedTweet)  in
                 tweet.updateWith(tweet: receivedTweet)
                 self.updateFavoriteCountDisplay()
+                self.updateFavoritesImage()
             }
             
             let errorBlock : (Error)->() = { (error) in
@@ -142,6 +157,57 @@ class TweetDetailViewController: UIViewController {
         }
     }
 
+    func updateRetweetImage() {
+        
+        if let tweet = tweet {
+            // update favorite image as per favorite state
+            var newImage : UIImage!
+            if let retweeted = tweet.retweeted,
+                retweeted == true {
+                newImage = UIImage(named: kRetweetedImage)
+            } else {
+                newImage = UIImage(named: kNotRetweetedImage)
+            }
+            
+            UIView.transition(with: retweetImageView,
+                              duration: 0.1,
+                              options: UIViewAnimationOptions.transitionCrossDissolve,
+                              animations: {
+                                self.retweetImageView.image = newImage
+                }, completion: nil)
+            
+            
+            self.retweetImageView.setNeedsDisplay()
+        }
+    }
+    
+    func updateFavoritesImage() {
+        
+        if let tweet = tweet {
+            // likes count
+            // update favorite image as per favorite state
+            var newImage : UIImage!
+            if let favorited = tweet.favorited,
+                favorited == true {
+                newImage = UIImage(named: kFavoritedImage)
+                // favoriteImage.image = UIImage(named: kFavoritedImage)
+            } else {
+                newImage = UIImage(named: kUnfavoritedImage)
+                // favoriteImage.image = UIImage(named: kUnfavoritedImage)
+            }
+            
+            UIView.transition(with: favoritesImageView,
+                              duration: 0.1,
+                              options: UIViewAnimationOptions.transitionCrossDissolve,
+                              animations: {
+                                self.favoritesImageView.image = newImage
+                }, completion: nil)
+            
+            
+            self.favoritesImageView.setNeedsDisplay()
+        }
+    }
+
   
     func updateFavoriteCountDisplay() {
         
@@ -161,6 +227,19 @@ class TweetDetailViewController: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if  segue.identifier! == kTweetReplyFromDetailSegue,
+            let navVC = segue.destination as? UINavigationController,
+            let composeVC = navVC.topViewController as? TweetComposeViewController,
+            let tweet = tweet,
+            let tweetID = tweet.tweetID {
+
+            // set in reply to ID and screename
+            composeVC.inReplyToID = tweetID
+            composeVC.inReplyToScreenName = tweet.user?.screename
+        }
+    }
     
 
     /*

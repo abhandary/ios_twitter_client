@@ -722,13 +722,13 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="F1r-73-MB6">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notretweeted" translatesAutoresizingMaskIntoConstraints="NO" id="F1r-73-MB6">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="6s8-Gv-WjL"/>
                                             <constraint firstAttribute="height" constant="15" id="xrV-2N-9y2"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_icon" translatesAutoresizingMaskIntoConstraints="NO" id="wcf-iR-GVU">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unfavorite_heart" translatesAutoresizingMaskIntoConstraints="NO" id="wcf-iR-GVU">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="7yN-Vx-Vho"/>
                                             <constraint firstAttribute="width" constant="15" id="CoD-WX-K7M"/>
@@ -798,6 +798,7 @@
                         <outlet property="thumbNailImage" destination="n7R-cY-OOs" id="mhn-ba-zAz"/>
                         <outlet property="timeStamp" destination="Zdu-Cu-SJd" id="RbJ-bj-kAz"/>
                         <outlet property="tweetText" destination="THC-dI-qUF" id="MlF-tI-Kqr"/>
+                        <segue destination="NC6-Ny-UKg" kind="show" identifier="tweetReplyFromDetailSegue" id="bl8-Mj-P9g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B6M-9o-oS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -954,6 +955,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2tX-pb-sw9"/>
-        <segue reference="axH-Rw-TLv"/>
+        <segue reference="bl8-Mj-P9g"/>
     </inferredMetricsTieBreakers>
 </document>
