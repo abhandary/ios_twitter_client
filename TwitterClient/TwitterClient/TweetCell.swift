@@ -43,60 +43,57 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var favoriteImage: UIImageView!
     @IBOutlet weak var favoriteLabel: UILabel!
     
-    @IBOutlet weak var nameAndTextViewVerticalSpacingToTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var thumbNailViewVerticalSpacingToTopConstraint: NSLayoutConstraint!
-    
-    
     var tweet : Tweet! {
         didSet {
-            
-            // tweet text
-            tweetTextLabel.text = tweet.text
-            
-            // user name and screenname
-            name.text = tweet.user?.name
-            if let screenname = tweet.user?.screename {
-                handle.text = "@\(screenname)"
-            }
-            
-            // thumbnail
-            if let user = tweet.user,
-                let imageURL = user.profileURL {
-                               self.thumbNailImage.setImageWith(URLRequest(url: imageURL),
-                                                 placeholderImage: nil,
-                                                 success: { (request, imageResponse, image) in
-                                                    if imageResponse != nil {
-                                                        
-                                                        self.thumbNailImage?.alpha = 0.0
-                                                        self.thumbNailImage?.image = image
-                                                        self.thumbNailImage?.contentMode = UIViewContentMode.scaleToFill
-                                                        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                                                            self.thumbNailImage?.alpha = 1.0
-                                                        })
-                                                    } else {
-                                                        self.thumbNailImage?.image = image
-                                                        self.thumbNailImage?.contentMode = UIViewContentMode.scaleToFill
-                                                    }
-                                                    self.thumbNailImage.layer.cornerRadius = 5
-                                                    self.thumbNailImage.clipsToBounds = true
-                    }, failure: { (request, response, error) in
-                        print(error)
-                })
-                
-            }
-            
-            // update favorite text and image
-            updateFavoritesDisplay()
-            
-            // update retweet text and image
-            updateRetweetDisplay()
-
-            // time label
-            timeLabel.text = tweet.timeString()
+            updateCellOnTweetSet()
         }
     }
     
-    
+    func updateCellOnTweetSet() {
+        // tweet text
+        tweetTextLabel.text = tweet.text
+        
+        // user name and screenname
+        name.text = tweet.user?.name
+        if let screenname = tweet.user?.screename {
+            handle.text = "@\(screenname)"
+        }
+        
+        // thumbnail
+        if let user = tweet.user,
+            let imageURL = user.profileURL {
+            self.thumbNailImage.setImageWith(URLRequest(url: imageURL),
+                                             placeholderImage: nil,
+                                             success: { (request, imageResponse, image) in
+                                                if imageResponse != nil {
+                                                    
+                                                    self.thumbNailImage?.alpha = 0.0
+                                                    self.thumbNailImage?.image = image
+                                                    self.thumbNailImage?.contentMode = UIViewContentMode.scaleToFill
+                                                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                                                        self.thumbNailImage?.alpha = 1.0
+                                                    })
+                                                } else {
+                                                    self.thumbNailImage?.image = image
+                                                    self.thumbNailImage?.contentMode = UIViewContentMode.scaleToFill
+                                                }
+                                                self.thumbNailImage.layer.cornerRadius = 5
+                                                self.thumbNailImage.clipsToBounds = true
+                }, failure: { (request, response, error) in
+                    print(error)
+            })
+            
+        }
+        
+        // update favorite text and image
+        updateFavoritesDisplay()
+        
+        // update retweet text and image
+        updateRetweetDisplay()
+        
+        // time label
+        timeLabel.text = tweet.timeString()
+    }
     
     
     override func awakeFromNib() {

@@ -10,9 +10,19 @@ import UIKit
 
 class RetweetCell: TweetCell {
 
+    @IBOutlet weak var retweetUserScreenName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+
+    override var tweet: Tweet! {
+        didSet {
+            updateCellOnTweetSet()
+            print(tweet.dictionary!)
+            retweetUserScreenName.text = "You Retweeted"
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

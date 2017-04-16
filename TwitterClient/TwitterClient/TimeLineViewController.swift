@@ -112,11 +112,18 @@ extension TimeLineViewController : TweetCellDelegate {
     
     func retweetTapped(sender : TweetCell) {
 
-        let successBlock : (Tweet) -> () = { (receivedTweet)  in
+        let retweetSuccessBlock : (Tweet) -> () = { (receivedTweet)  in
             sender.tweet.updateWith(tweet: receivedTweet)
             sender.updateRetweetDisplay()
         }
 
+        let unretweetSuccessBlock : (Tweet) -> () = { (receivedTweet)  in
+            sender.tweet.updateWith(tweet: receivedTweet)
+            sender.tweet.retweeted = false
+            sender.updateRetweetDisplay()
+        }
+
+        
         let errorBlock : (Error)->() = { (error) in
             // @todo: show error banner
         }
@@ -124,11 +131,11 @@ extension TimeLineViewController : TweetCellDelegate {
         
         if  let tweetID = sender.tweet.tweetID {
             if sender.tweet.retweeted == false {
-                UserAccount.currentUserAccount?.post(retweetID: tweetID, success: successBlock, error: errorBlock)
+                UserAccount.currentUserAccount?.post(retweetID: tweetID, success: retweetSuccessBlock, error: errorBlock)
             } else {
                 if let originalTweetIDStr = sender.tweet.originalTweetID,
                     let originalID = Int(originalTweetIDStr) {
-                    UserAccount.currentUserAccount?.post(unretweetID: originalID, success: successBlock, error: errorBlock)
+                    UserAccount.currentUserAccount?.post(unretweetID: originalID, success: unretweetSuccessBlock, error: errorBlock)
                 } else {
                     errorBlock(NSError(domain: "No original ID in retweet", code: 0, userInfo: nil))
                 }
@@ -172,10 +179,19 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
-        cell.tweet = self.tweets![indexPath.row]
-        cell.delegate = self
-        return cell
+        let tweet = self.tweets![indexPath.row]
+        
+        if tweet.retweeted! == true {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "RetweetCell") as! RetweetCell
+            cell.tweet = self.tweets![indexPath.row]
+            cell.delegate = self
+            return cell
+        } else {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
+            cell.tweet = self.tweets![indexPath.row]
+            cell.delegate = self
+            return cell
+        }
     }
     
     
