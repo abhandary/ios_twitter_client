@@ -43,6 +43,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var favoriteImage: UIImageView!
     @IBOutlet weak var favoriteLabel: UILabel!
     
+    @IBOutlet weak var nameAndTextViewVerticalSpacingToTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var thumbNailViewVerticalSpacingToTopConstraint: NSLayoutConstraint!
+    
     
     var tweet : Tweet! {
         didSet {

@@ -257,10 +257,12 @@
                                             <outlet property="favoriteLabel" destination="tKB-Dd-YwS" id="yha-36-wwp"/>
                                             <outlet property="handle" destination="Q1T-mY-l34" id="xT6-gh-vay"/>
                                             <outlet property="name" destination="2b7-H1-Oh6" id="hXb-Ms-lT9"/>
+                                            <outlet property="nameAndTextViewVerticalSpacingToTopConstraint" destination="GV6-LX-wim" id="wJG-w8-5Hk"/>
                                             <outlet property="replyImageView" destination="Wlp-lX-4z0" id="QLM-C4-Bw3"/>
                                             <outlet property="retweetCountLabel" destination="inj-0u-NcN" id="F4t-g0-hJl"/>
                                             <outlet property="retweetImageView" destination="z89-bA-oIt" id="uAy-wG-cHN"/>
                                             <outlet property="thumbNailImage" destination="a9q-DB-FUA" id="4Pd-85-1Rk"/>
+                                            <outlet property="thumbNailViewVerticalSpacingToTopConstraint" destination="D6I-C5-qve" id="V0P-1z-Xba"/>
                                             <outlet property="timeLabel" destination="Ax2-YT-qZg" id="VYz-Oq-ASB"/>
                                             <outlet property="tweetTextLabel" destination="Z5M-ey-8WW" id="otK-GB-CqR"/>
                                             <segue destination="t5F-GD-LgP" kind="show" identifier="tweetDetailSegue" id="Pcj-Zy-6Tn"/>
@@ -280,7 +282,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="lW9-v3-XqB">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweeted_dark" translatesAutoresizingMaskIntoConstraints="NO" id="lW9-v3-XqB">
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="I4t-6w-ijk"/>
                                                                 <constraint firstAttribute="width" constant="15" id="TNa-WO-60k"/>
@@ -789,6 +791,7 @@
         <image name="notretweeted" width="15" height="10"/>
         <image name="reply_icon" width="16" height="14"/>
         <image name="retweet_icon" width="10" height="10"/>
+        <image name="retweeted_dark" width="15" height="10"/>
         <image name="unfavorite_heart" width="11" height="8"/>
     </resources>
     <inferredMetricsTieBreakers>

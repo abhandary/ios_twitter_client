@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RetweetCell: UITableViewCell {
+class RetweetCell: TweetCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
