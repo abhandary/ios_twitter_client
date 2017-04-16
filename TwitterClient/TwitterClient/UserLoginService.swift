@@ -25,13 +25,13 @@ let kAccessTokenMethod = "POST"
 
 class UserLoginService {
     
-    var errorCompletionHandler : ((NSError) -> Void)?
+    var errorCompletionHandler : ((Error) -> Void)?
     var successCompletionHandler: ((Void) -> Void)?
     var receivedRequestTokenHandler: ((URL) -> Void)?
     
     // MARK: - public routines
     func loginUser(success:@escaping((Void) -> Void),
-                   error: @escaping((NSError) -> Void),
+                   error: @escaping((Error) -> Void),
                    receivedRequestToken: @escaping((URL) -> Void)) {
         
         self.errorCompletionHandler = error
@@ -50,8 +50,11 @@ class UserLoginService {
                                                             self.errorCompletionHandler?(NSError(domain: "Got empty request token!", code: 0, userInfo: nil))
                                                         }
             }, failure: { (error )  in
-                print(error)
-                // self.errorCompletionHandler?(error)
+                if let error = error {
+                    self.errorCompletionHandler?(error)
+                } else {
+                    self.errorCompletionHandler?(NSError(domain: "No Token, no error!", code: 0, userInfo: nil))
+                }
         })
         
     }
@@ -72,8 +75,7 @@ class UserLoginService {
                                                             success()
                                                             
                 }, failure: { (receivedError )  in
-                    print(receivedError)
-                    // self.errorCompletionHandler?(error)
+                    // print(receivedError)
                     error(receivedError!);
             })
             

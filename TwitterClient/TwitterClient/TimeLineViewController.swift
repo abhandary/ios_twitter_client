@@ -153,7 +153,7 @@ extension TimeLineViewController : TweetCellDelegate {
 
         
         let errorBlock : (Error)->() = { (error) in
-            // @todo: show error banner
+            self.showNetworkError()
         }
 
         
@@ -181,7 +181,7 @@ extension TimeLineViewController : TweetCellDelegate {
             }
             
             let errorBlock : (Error)->() = { (error) in
-                // @todo: show error banner
+                self.showNetworkError()
             }
 
             if sender.tweet.favorited! == true {

@@ -72,11 +72,6 @@ class UserTimeLineService {
         }
     }
     
-    func get(retweetsForTweetID: Int, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        let params = ["id" : retweetsForTweetID]
-        
-    }
-    
     func post(statusUpdate : String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         let params = ["status" : statusUpdate]
         postStatusUpdate(params: params, success: success, error: error)
