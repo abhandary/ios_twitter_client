@@ -96,6 +96,10 @@ class UserAccount {
         homeTimeLineService.post(retweetID: retweetID, success: success, error: error)
     }
     
+    func post(unretweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        homeTimeLineService.post(unretweetID: unretweetID, success: success, error: error)
+    }
+    
     func post(favoriteTweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         homeTimeLineService.post(favoriteTweetID: favoriteTweetID, success: success, error: error)
     }

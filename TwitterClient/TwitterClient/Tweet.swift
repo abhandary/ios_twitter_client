@@ -19,7 +19,7 @@ class Tweet {
     
 
     // https://courses.codepath.com/courses/intro_to_ios/pages/unretweeting
-    var originalTweetIDStr : String?
+    var originalTweetID : String?
     
     let kMonthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
@@ -60,9 +60,9 @@ class Tweet {
             if retweeted == true {
                 if let retweetedStatus = dictionary["retweeted_status"] as? [String : Any] {
                     // retweeted tweet
-                    originalTweetIDStr = retweetedStatus["id_str"] as? String
+                    originalTweetID = retweetedStatus["id_str"] as? String
                 } else {
-                    originalTweetIDStr = dictionary["id_str"] as? String
+                    originalTweetID = dictionary["id_str"] as? String
                 }
             }
         }
@@ -70,6 +70,15 @@ class Tweet {
         if let favoritedInt = dictionary["favorited"] as? Int {
             favorited = favoritedInt == 1 ? true : false 
         }
+    }
+    
+    func updateWith(tweet : Tweet) {
+        retweetCount = tweet.retweetCount
+        retweeted = tweet.retweeted
+        originalTweetID = tweet.originalTweetID
+        
+        favorited = tweet.favorited
+        favoritesCount = tweet.favoritesCount
     }
     
     func timeString() -> String {
@@ -106,6 +115,8 @@ class Tweet {
         }
         return qualifiedTime
     }
+    
+    
     
     static func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet] {
         return dictionaries.map { Tweet(dictionary: $0) }

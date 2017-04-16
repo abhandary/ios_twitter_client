@@ -13,6 +13,7 @@ let kHomeTimeLine      = "1.1/statuses/home_timeline.json"
 let kVerifyCredentials = "1.1/account/verify_credentials.json"
 let kPostStatusUpdate  = "1.1/statuses/update.json"
 let kRetweet           = "1.1/statuses/retweet/%lld.json"
+let kUnretweet         = "1.1/statuses/unretweet/%lld.json"
 let kFavorites         = "1.1/favorites/create.json"
 let kUnfavorites       = "1.1/favorites/destroy.json"
 
@@ -99,8 +100,28 @@ class UserTimeLineService {
         }) { (task, receivedError) in
             error(receivedError)
         }
-
     }
+    
+    func post(unretweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        
+        let requestURLString = String(format: kUnretweet, unretweetID)
+        let params = ["id" : unretweetID]
+        OAuthClient.sharedInstance.post(requestURLString,
+                                        parameters: params,
+                                        progress: nil,
+                                        success: { (task, response) in
+                                            print(response)
+                                            if let dictionary = response as? NSDictionary {
+                                                let tweet = Tweet(dictionary: dictionary);
+                                                success(tweet)
+                                            } else {
+                                                error(NSError(domain: "unable to post tweet", code: 0, userInfo: nil))
+                                            }
+        }) { (task, receivedError) in
+            error(receivedError)
+        }
+    }
+
 
     func post(favoriteTweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         

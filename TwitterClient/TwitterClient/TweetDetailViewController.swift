@@ -86,13 +86,26 @@ class TweetDetailViewController: UIViewController {
 
         if let tweet = tweet,
             let tweetID = tweet.tweetID {
-            UserAccount.currentUserAccount?.post(retweetID: tweetID, success: { (receivedTweet) in
-                self.incrementRetweetCountAndUpdateDisplay()
-                // @todo: insert tweet into timeline
-                }, error: { (error) in
-                    // @todod: show error banner
-                    print(error)
-            })
+            
+            let successBlock : (Tweet) -> () = { (receivedTweet)  in
+                tweet.updateWith(tweet: receivedTweet)
+                self.updateRetweetCountDisplay()
+            }
+            
+            let errorBlock : (Error)->() = { (error) in
+                // @todo: show error banner
+            }
+            
+            if tweet.retweeted == false {
+                UserAccount.currentUserAccount?.post(retweetID: tweetID, success: successBlock, error: errorBlock)
+            } else {
+                if let originalTweetIDStr = tweet.originalTweetID,
+                    let originalID = Int(originalTweetIDStr) {
+                    UserAccount.currentUserAccount?.post(unretweetID: originalID, success: successBlock, error: errorBlock)
+                } else {
+                    errorBlock(NSError(domain: "No original ID in retweet", code: 0, userInfo: nil))
+                }
+            }
         }
     }
 
@@ -100,33 +113,28 @@ class TweetDetailViewController: UIViewController {
         if let tweet = tweet,
             let tweetID = tweet.tweetID {
             
+            let successBlock : (Tweet) -> () = { (receivedTweet)  in
+                tweet.updateWith(tweet: receivedTweet)
+                self.updateFavoriteCountDisplay()
+            }
+            
+            let errorBlock : (Error)->() = { (error) in
+                // @todo: show error banner
+            }
+
+            
             if tweet.favorited! == false {
-                UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: { (receivedTweet) in
-                        tweet.favorited = receivedTweet.favorited
-                        tweet.favoritesCount = receivedTweet.favoritesCount
-                        self.updateFavoriteCountDisplay()
-                    }, error: { (error) in
-                        // @todod: show error banner
-                        print(error)
-                })
+                UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: successBlock, error: errorBlock)
             } else {
-                UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: { (receivedTweet) in
-                        tweet.favorited = receivedTweet.favorited
-                        tweet.favoritesCount = receivedTweet.favoritesCount
-                        self.updateFavoriteCountDisplay()
-                    }, error: { (error) in
-                        // @todod: show error banner
-                        print(error)
-                })
+                UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: successBlock, error: errorBlock)
             }
         }
     }
 
     
-    func incrementRetweetCountAndUpdateDisplay() {
+    func updateRetweetCountDisplay() {
         
         if let tweet = tweet {
-            tweet.retweetCount = tweet.retweetCount! + 1
             numberOfRetweetsLabel.text = String(tweet.retweetCount!)
             if let tweetCell = tweetCell {
                 tweetCell.updateRetweetDisplay()

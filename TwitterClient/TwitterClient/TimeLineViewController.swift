@@ -100,16 +100,28 @@ class TimeLineViewController: UIViewController  {
 extension TimeLineViewController : TweetCellDelegate {
     
     func retweetTapped(sender : TweetCell) {
+
+        let successBlock : (Tweet) -> () = { (receivedTweet)  in
+            sender.tweet.updateWith(tweet: receivedTweet)
+            sender.updateRetweetDisplay()
+        }
+
+        let errorBlock : (Error)->() = { (error) in
+            // @todo: show error banner
+        }
+
         
         if  let tweetID = sender.tweet.tweetID {
-            UserAccount.currentUserAccount?.post(retweetID: tweetID, success: { (tweet) in
-                    sender.tweet.retweetCount = sender.tweet.retweetCount! + 1
-                    sender.updateRetweetDisplay()
-                    // @todo: insert tweet into timeline
-                }, error: { (error) in
-                    // @todod: show error banner
-                    print(error)
-            })
+            if sender.tweet.retweeted == false {
+                UserAccount.currentUserAccount?.post(retweetID: tweetID, success: successBlock, error: errorBlock)
+            } else {
+                if let originalTweetIDStr = sender.tweet.originalTweetID,
+                    let originalID = Int(originalTweetIDStr) {
+                    UserAccount.currentUserAccount?.post(unretweetID: originalID, success: successBlock, error: errorBlock)
+                } else {
+                    errorBlock(NSError(domain: "No original ID in retweet", code: 0, userInfo: nil))
+                }
+            }
         }
     }
     
@@ -117,27 +129,20 @@ extension TimeLineViewController : TweetCellDelegate {
         
         if  let tweetID = sender.tweet.tweetID {
             
+            let successBlock : (Tweet) -> () = { (receivedTweet)  in
+                sender.tweet.updateWith(tweet: receivedTweet)
+                sender.updateFavoritesDisplay()
+            }
+            
+            let errorBlock : (Error)->() = { (error) in
+                // @todo: show error banner
+            }
+
+            
             if sender.tweet.favorited! == true {
-                UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: { (tweet) in
-                    sender.tweet.favorited = tweet.favorited!
-                    sender.tweet.favoritesCount = tweet.favoritesCount
-                    sender.updateFavoritesDisplay()
-                    // @todo: insert tweet into timeline
-                    }, error: { (error) in
-                        // @todod: show error banner
-                        print(error)
-                })
+                UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success:successBlock, error: errorBlock)
             } else {
-                UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: { (tweet) in
-                    
-                    sender.tweet.favorited = tweet.favorited!
-                    sender.tweet.favoritesCount = tweet.favoritesCount
-                    sender.updateFavoritesDisplay()
-                    // @todo: insert tweet into timeline
-                    }, error: { (error) in
-                        // @todod: show error banner
-                        print(error)
-                })
+                UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: successBlock, error:errorBlock)
             }
         }
     }
