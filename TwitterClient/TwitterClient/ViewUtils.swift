@@ -25,4 +25,16 @@ class ViewUtils {
                               completion: nil)
         }
     }
+    
+    static func transition(imageView: UIImageView, imageNamed: String, duration : Double) {
+        let newImage = UIImage(named: imageNamed)
+        UIView.transition(with: imageView,
+                          duration: duration,
+                          options: UIViewAnimationOptions.transitionCrossDissolve,
+                          animations: {
+                            imageView.image = newImage
+            }, completion: nil)
+        
+        
+    }
 }

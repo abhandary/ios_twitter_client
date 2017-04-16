@@ -813,6 +813,45 @@
                                 <color key="textColor" red="0.49326923080000001" green="0.49326923080000001" blue="0.49326923080000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5g4-R5-t1i">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBd-0I-CMs">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOb-17-jQW">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="124" id="FiW-ra-b3L"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-error" highlightedImage="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="RRf-0B-pjM">
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="RRf-0B-pjM" secondAttribute="height" multiplier="1:1" id="O4C-xl-7cK"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="2i3-56-OYe"/>
+                                            <constraint firstAttribute="trailing" secondItem="nOb-17-jQW" secondAttribute="trailing" constant="10" id="3mA-h2-3Bk"/>
+                                            <constraint firstItem="RRf-0B-pjM" firstAttribute="top" secondItem="WBd-0I-CMs" secondAttribute="top" constant="15" id="7FV-M7-K0a"/>
+                                            <constraint firstAttribute="bottom" secondItem="RRf-0B-pjM" secondAttribute="bottom" constant="15" id="ABA-X6-eTg"/>
+                                            <constraint firstAttribute="width" constant="194" id="AsB-nY-Uzo"/>
+                                            <constraint firstAttribute="bottom" secondItem="nOb-17-jQW" secondAttribute="bottom" id="ie9-gz-vQn"/>
+                                            <constraint firstItem="nOb-17-jQW" firstAttribute="top" secondItem="WBd-0I-CMs" secondAttribute="top" id="ss5-fj-vr5"/>
+                                            <constraint firstItem="RRf-0B-pjM" firstAttribute="leading" secondItem="WBd-0I-CMs" secondAttribute="leading" constant="15" id="tgY-bb-XpG"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="D6b-Mg-lB8"/>
+                                    <constraint firstItem="WBd-0I-CMs" firstAttribute="centerX" secondItem="5g4-R5-t1i" secondAttribute="centerX" id="FJ5-7k-k0V"/>
+                                    <constraint firstItem="WBd-0I-CMs" firstAttribute="centerY" secondItem="5g4-R5-t1i" secondAttribute="centerY" id="bPJ-bH-C8I"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -822,11 +861,14 @@
                             <constraint firstAttribute="trailing" secondItem="MJM-bp-wwy" secondAttribute="trailing" id="SII-u6-4WG"/>
                             <constraint firstItem="THC-dI-qUF" firstAttribute="leading" secondItem="u4f-SJ-h8i" secondAttribute="leading" constant="15" id="UYl-he-Y27"/>
                             <constraint firstAttribute="trailing" secondItem="THC-dI-qUF" secondAttribute="trailing" constant="3" id="XYW-St-Sdm"/>
+                            <constraint firstItem="Glt-qs-fUi" firstAttribute="top" secondItem="5g4-R5-t1i" secondAttribute="bottom" constant="100" id="YO2-c2-jzA"/>
                             <constraint firstItem="MJM-bp-wwy" firstAttribute="leading" secondItem="u4f-SJ-h8i" secondAttribute="leading" id="ZxM-Wq-ggd"/>
                             <constraint firstItem="IQr-YT-Rb3" firstAttribute="top" secondItem="Zdu-Cu-SJd" secondAttribute="bottom" constant="10" id="bH5-ma-7Tj"/>
                             <constraint firstItem="THC-dI-qUF" firstAttribute="top" secondItem="MJM-bp-wwy" secondAttribute="bottom" constant="10" id="cRC-yx-Fgt"/>
                             <constraint firstItem="Zdu-Cu-SJd" firstAttribute="top" secondItem="THC-dI-qUF" secondAttribute="bottom" constant="10" id="eiL-Vk-Y1q"/>
+                            <constraint firstItem="5g4-R5-t1i" firstAttribute="leading" secondItem="u4f-SJ-h8i" secondAttribute="leading" id="exk-ZY-lgc"/>
                             <constraint firstItem="Zdu-Cu-SJd" firstAttribute="leading" secondItem="THC-dI-qUF" secondAttribute="leading" id="gTO-LO-Tzf"/>
+                            <constraint firstAttribute="trailing" secondItem="5g4-R5-t1i" secondAttribute="trailing" id="tV9-2n-Ty1"/>
                             <constraint firstItem="IQr-YT-Rb3" firstAttribute="leading" secondItem="u4f-SJ-h8i" secondAttribute="leading" id="z1H-RS-7c7"/>
                             <constraint firstItem="MJM-bp-wwy" firstAttribute="height" secondItem="u4f-SJ-h8i" secondAttribute="height" multiplier="0.15" id="zya-1l-KVT"/>
                         </constraints>
@@ -834,6 +876,7 @@
                     <connections>
                         <outlet property="favoritesImageView" destination="wcf-iR-GVU" id="n0y-ab-QMI"/>
                         <outlet property="name" destination="EeA-xK-mCO" id="Tuh-th-fCh"/>
+                        <outlet property="networkErrorBannerView" destination="5g4-R5-t1i" id="ue1-sj-xct"/>
                         <outlet property="numberOfLikesLabel" destination="W44-Nw-FND" id="SwE-9E-2OO"/>
                         <outlet property="numberOfRetweetsLabel" destination="4bH-VF-nVf" id="GxL-ZT-kMx"/>
                         <outlet property="replyImageView" destination="nyb-8T-oap" id="GCR-XL-OVe"/>
@@ -1043,7 +1086,7 @@
         <image name="white-error" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="axH-Rw-TLv"/>
+        <segue reference="bl8-Mj-P9g"/>
         <segue reference="2tX-pb-sw9"/>
     </inferredMetricsTieBreakers>
 </document>

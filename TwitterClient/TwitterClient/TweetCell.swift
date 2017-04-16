@@ -132,24 +132,12 @@ class TweetCell: UITableViewCell {
     }
 
     func updateRetweetDisplay() {
+        
         retweetCountLabel.text = String(tweet.retweetCount!)
         
-        // update favorite image as per favorite state
-        var newImage : UIImage!
-        if let retweeted = tweet.retweeted,
-            retweeted == true {
-            newImage = UIImage(named: kRetweetedImage)
-        } else {
-            newImage = UIImage(named: kNotRetweetedImage)
-        }
-        
-        UIView.transition(with: retweetImageView,
-                          duration: 0.1,
-                          options: UIViewAnimationOptions.transitionCrossDissolve,
-                          animations: {
-                            self.retweetImageView.image = newImage
-            }, completion: nil)
-
+        ViewUtils.transition(imageView: retweetImageView,
+                             imageNamed: tweet.retweeted! == true ? kRetweetedImage : kNotRetweetedImage,
+                             duration: 0.1)
         
         self.setNeedsDisplay()
     }
@@ -162,22 +150,9 @@ class TweetCell: UITableViewCell {
         }
         
         // update favorite image as per favorite state
-        var newImage : UIImage!
-        if let favorited = tweet.favorited,
-            favorited == true {
-            newImage = UIImage(named: kFavoritedImage)
-           // favoriteImage.image = UIImage(named: kFavoritedImage)
-        } else {
-            newImage = UIImage(named: kUnfavoritedImage)
-           // favoriteImage.image = UIImage(named: kUnfavoritedImage)
-        }
-        
-        UIView.transition(with: favoriteImage,
-                          duration: 0.1,
-                          options: UIViewAnimationOptions.transitionCrossDissolve,
-                          animations: {
-                self.favoriteImage.image = newImage
-        }, completion: nil)
+        ViewUtils.transition(imageView: favoriteImage,
+                             imageNamed: tweet.favorited! == true ? kFavoritedImage : kUnfavoritedImage,
+                             duration: 0.1)
         
 
         self.setNeedsDisplay()

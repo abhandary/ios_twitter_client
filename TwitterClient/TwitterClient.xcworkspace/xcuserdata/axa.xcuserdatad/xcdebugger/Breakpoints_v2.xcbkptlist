@@ -940,11 +940,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TwitterClient/TweetDetailViewController.swift"
-            timestampString = "514066751.858436"
+            timestampString = "514071303.800403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "retweetImageTapped()"
             landmarkType = "7">
             <Locations>
@@ -1004,11 +1004,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TwitterClient/TweetCell.swift"
-            timestampString = "514023078.495267"
+            timestampString = "514072227.122406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "updateRetweetDisplay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1020,11 +1020,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TwitterClient/TweetDetailViewController.swift"
-            timestampString = "514066751.858436"
+            timestampString = "514071410.30865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "likeImageTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1132,11 +1132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TwitterClient/TweetDetailViewController.swift"
-            timestampString = "514066751.858436"
+            timestampString = "514071410.30865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "retweetImageTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1388,11 +1388,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TwitterClient/TweetDetailViewController.swift"
-            timestampString = "514070603.737983"
+            timestampString = "514072227.122406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>

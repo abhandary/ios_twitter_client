@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TweetDetailViewController: UIViewController {
 
@@ -37,6 +38,7 @@ class TweetDetailViewController: UIViewController {
     
     @IBOutlet weak var favoritesImageView: UIImageView!
     
+    @IBOutlet weak var networkErrorBannerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +100,7 @@ class TweetDetailViewController: UIViewController {
 
         if let tweet = tweet,
             let tweetID = tweet.tweetID {
-            
+
             let successBlock : (Tweet) -> () = { (receivedTweet)  in
                 tweet.updateWith(tweet: receivedTweet)
                 self.updateRetweetCountDisplay()
@@ -106,7 +108,7 @@ class TweetDetailViewController: UIViewController {
             }
             
             let errorBlock : (Error)->() = { (error) in
-                // @todo: show error banner
+                // ViewUtils.showToast(view: self.networkErrorBannerView)
             }
             
             if tweet.retweeted == false {
@@ -126,7 +128,7 @@ class TweetDetailViewController: UIViewController {
     func likeImageTapped() {
         if let tweet = tweet,
             let tweetID = tweet.tweetID {
-            
+
             let successBlock : (Tweet) -> () = { (receivedTweet)  in
                 tweet.updateWith(tweet: receivedTweet)
                 self.updateFavoriteCountDisplay()
@@ -134,7 +136,7 @@ class TweetDetailViewController: UIViewController {
             }
             
             let errorBlock : (Error)->() = { (error) in
-                // @todo: show error banner
+                // ViewUtils.showToast(view: self.networkErrorBannerView)
             }
 
             
@@ -160,47 +162,18 @@ class TweetDetailViewController: UIViewController {
     func updateRetweetImage() {
         
         if let tweet = tweet {
-            // update retweet image as per favorite state
-            var newImage : UIImage!
-            if let retweeted = tweet.retweeted,
-                retweeted == true {
-                newImage = UIImage(named: kRetweetedImage)
-            } else {
-                newImage = UIImage(named: kNotRetweetedImage)
-            }
-            
-            UIView.transition(with: retweetImageView,
-                              duration: 0.1,
-                              options: UIViewAnimationOptions.transitionCrossDissolve,
-                              animations: {
-                                self.retweetImageView.image = newImage
-                }, completion: nil)
-            
-            
+            ViewUtils.transition(imageView: self.retweetImageView,
+                                 imageNamed: tweet.retweeted! == true ? kRetweetedImage : kNotRetweetedImage,
+                                 duration: 0.1)
             self.retweetImageView.setNeedsDisplay()
         }
     }
     
     func updateFavoritesImage() {
-        
         if let tweet = tweet {
-            // update favorite image as per favorite state
-            var newImage : UIImage!
-            if let favorited = tweet.favorited,
-                favorited == true {
-                newImage = UIImage(named: kFavoritedImage)
-            } else {
-                newImage = UIImage(named: kUnfavoritedImage)
-            }
-            
-            UIView.transition(with: favoritesImageView,
-                              duration: 0.1,
-                              options: UIViewAnimationOptions.transitionCrossDissolve,
-                              animations: {
-                                self.favoritesImageView.image = newImage
-                }, completion: nil)
-            
-            
+            ViewUtils.transition(imageView: self.favoritesImageView,
+                                 imageNamed: tweet.favorited! == true ? kFavoritedImage : kUnfavoritedImage,
+                                 duration: 0.1)
             self.favoritesImageView.setNeedsDisplay()
         }
     }
