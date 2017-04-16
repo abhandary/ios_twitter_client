@@ -213,7 +213,7 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_icon" translatesAutoresizingMaskIntoConstraints="NO" id="X6T-bw-rf7">
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="UsI-6i-w30"/>
-                                                                <constraint firstAttribute="width" constant="15" id="tUq-yr-4cC"/>
+                                                                <constraint firstAttribute="width" constant="18" id="tUq-yr-4cC"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="285" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKB-Dd-YwS">
