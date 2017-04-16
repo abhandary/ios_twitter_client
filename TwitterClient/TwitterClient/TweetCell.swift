@@ -18,6 +18,10 @@ class TweetCell: UITableViewCell {
 
     let kFavoritedImage = "favorite_heart"
     let kUnfavoritedImage = "unfavorite_heart"
+
+    let kRetweetedImage = "retweeted"
+    let kNotRetweetedImage = "notretweeted"
+
     
     weak var delegate : TweetCellDelegate?
     
@@ -78,11 +82,11 @@ class TweetCell: UITableViewCell {
                 
             }
             
+            // update favorite text and image
             updateFavoritesDisplay()
             
- 
-            // retweet count
-            retweetCountLabel.text = String(tweet.retweetCount!)
+            // update retweet text and image
+            updateRetweetDisplay()
 
             // time label
             timeLabel.text = tweet.timeString()
@@ -129,6 +133,24 @@ class TweetCell: UITableViewCell {
 
     func updateRetweetDisplay() {
         retweetCountLabel.text = String(tweet.retweetCount!)
+        
+        // update favorite image as per favorite state
+        var newImage : UIImage!
+        if let retweeted = tweet.retweeted,
+            retweeted == true {
+            newImage = UIImage(named: kRetweetedImage)
+        } else {
+            newImage = UIImage(named: kNotRetweetedImage)
+        }
+        
+        UIView.transition(with: retweetImageView,
+                          duration: 0.1,
+                          options: UIViewAnimationOptions.transitionCrossDissolve,
+                          animations: {
+                            self.retweetImageView.image = newImage
+            }, completion: nil)
+
+        
         self.setNeedsDisplay()
     }
 
@@ -151,7 +173,7 @@ class TweetCell: UITableViewCell {
         }
         
         UIView.transition(with: favoriteImage,
-                          duration: 0.2,
+                          duration: 0.1,
                           options: UIViewAnimationOptions.transitionCrossDissolve,
                           animations: {
                 self.favoriteImage.image = newImage

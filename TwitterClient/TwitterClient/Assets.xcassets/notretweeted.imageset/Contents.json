@@ -7,12 +7,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "retweet_icon-1.png",
+      "filename" : "notretweeted-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "retweet_icon-2.png",
+      "filename" : "notretweeted.png",
       "scale" : "3x"
     }
   ],
