@@ -15,6 +15,7 @@ class TimeLineViewController: UIViewController  {
     static let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
     let kTweetDetailSegue = "tweetDetailSegue"
     let kTweetDetailSegueFromReplyToCell = "tweetDetailSegueFromReplyToCell"
+    let kTweetDetailSegueFromRetweetCell = "tweetDetailSegueFromRetweet"
     let kTweetComposeSegue = "tweetComposeSegue"
     let kTweetReplySegue = "tweetReplySegue"
     
@@ -87,7 +88,8 @@ class TimeLineViewController: UIViewController  {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == kTweetDetailSegue ||
-           segue.identifier == kTweetDetailSegueFromReplyToCell,
+           segue.identifier == kTweetDetailSegueFromReplyToCell ||
+            segue.identifier == kTweetDetailSegueFromRetweetCell,
             let cell = sender as? TweetCell,
             let detailVC = segue.destination as? TweetDetailViewController,
             let indexPath = self.tableView.indexPath(for: cell) {

@@ -33,7 +33,8 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        
+        svc = SFSafariViewController(url: URL(string: "https://mobile.twitter.com/signup")!)
+        self.present(svc!, animated: true, completion: nil)
     }
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {

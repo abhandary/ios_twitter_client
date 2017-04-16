@@ -588,6 +588,7 @@
                                             <outlet property="thumbNailImage" destination="ZFl-nL-kLY" id="5ad-an-egA"/>
                                             <outlet property="timeLabel" destination="tWa-cQ-lTh" id="Hsb-tz-Fgi"/>
                                             <outlet property="tweetTextLabel" destination="oq1-mB-tbI" id="tb3-IU-sAc"/>
+                                            <segue destination="t5F-GD-LgP" kind="show" identifier="tweetDetailSegueFromRetweet" id="2tX-pb-sw9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -952,7 +953,7 @@
         <image name="unfavorite_heart" width="11" height="8"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nqN-BO-mxD"/>
+        <segue reference="2tX-pb-sw9"/>
         <segue reference="axH-Rw-TLv"/>
     </inferredMetricsTieBreakers>
 </document>
