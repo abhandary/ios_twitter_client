@@ -88,8 +88,12 @@ class UserAccount {
     }
 
     
-    func post(statusUpdate : StatusUpdate,  success: @escaping ((Tweet)->()), error:@escaping ((Error)->Void)) {
+    func post(statusUpdate : String,  success: @escaping ((Tweet)->()), error:@escaping ((Error)->Void)) {
         homeTimeLineService.post(statusUpdate: statusUpdate, success: success, error: error)
+    }
+    
+    func post(statusUpdate : String, inReplyTo: String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        homeTimeLineService.post(statusUpdate: statusUpdate, inReplyTo: inReplyTo, success: success, error: error)
     }
     
     func post(retweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {

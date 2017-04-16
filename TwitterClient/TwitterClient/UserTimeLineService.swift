@@ -72,16 +72,17 @@ class UserTimeLineService {
         }
     }
     
-    func post(statusUpdate : StatusUpdate, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        guard statusUpdate.tweetText != nil else {
-            error(NSError(domain: "bad status text", code: 0, userInfo: nil))
-            return;
-        }
-        let params = ["status" : statusUpdate.tweetText!]
+    func post(statusUpdate : String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        let params = ["status" : statusUpdate]
         postStatusUpdate(params: params, success: success, error: error)
     }
-    
 
+    func post(statusUpdate : String, inReplyTo: String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        let params = ["status" : statusUpdate]
+        postStatusUpdate(params: params, success: success, error: error)
+    }
+
+    
     func post(retweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         
         let requestURLString = String(format: kRetweet, retweetID)

@@ -25,12 +25,21 @@ class TweetComposeViewController: UIViewController {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var countdownLabel: UILabel!
 
+    @IBOutlet weak var replyingToLabel: UILabel!
+    @IBOutlet weak var tweetEntryVerticalDistanceToThumbnailImageConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var replyingToScreename: UILabel!
     var tweetCount = 140
     let maxTweetCount = 140
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        replyingToScreename.isHidden = true
+        replyingToLabel.isHidden = true
+        tweetEntryVerticalDistanceToThumbnailImageConstraint.constant = 20
         
         if let user = User.currentUser {
             if let profileURL = user.profileURL {
@@ -51,8 +60,8 @@ class TweetComposeViewController: UIViewController {
     @IBAction func tweetButtonTapped(_ sender: AnyObject) {
         
         if let tweetText = self.tweetEntryTextField.text {
-            let statusUpdate = StatusUpdate(tweetText)
-            UserAccount.currentUserAccount?.post(statusUpdate: statusUpdate, success: { (tweet) in
+            
+            UserAccount.currentUserAccount?.post(statusUpdate: tweetText, success: { (tweet) in
                     self.postedTweet = tweet
                     self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
                 }, error: { (error) in

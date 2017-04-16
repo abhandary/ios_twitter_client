@@ -681,18 +681,33 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="↓ Replying to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHd-Pg-wdl">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@nytimes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3l-gq-iKc">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="coH-BW-VHE" firstAttribute="top" secondItem="dAr-LB-Obb" secondAttribute="bottom" constant="6" id="1kF-1i-q5A"/>
+                            <constraint firstItem="hHd-Pg-wdl" firstAttribute="top" secondItem="9oB-fu-dAt" secondAttribute="bottom" constant="8" id="6Td-YV-L55"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="f3l-gq-iKc" secondAttribute="trailing" constant="3" id="AgU-Hx-gMj"/>
+                            <constraint firstItem="f3l-gq-iKc" firstAttribute="leading" secondItem="hHd-Pg-wdl" secondAttribute="trailing" constant="8" id="GYz-hw-Or2"/>
                             <constraint firstItem="9oB-fu-dAt" firstAttribute="leading" secondItem="NcN-JT-SeD" secondAttribute="leading" constant="15" id="Jmy-ac-0SQ"/>
                             <constraint firstItem="dAr-LB-Obb" firstAttribute="centerY" secondItem="9oB-fu-dAt" secondAttribute="centerY" constant="-15" id="LTc-Md-oOQ"/>
                             <constraint firstAttribute="trailing" secondItem="A4q-Bo-g3w" secondAttribute="trailing" constant="10" id="Su1-pV-HTO"/>
                             <constraint firstItem="coH-BW-VHE" firstAttribute="leading" secondItem="9oB-fu-dAt" secondAttribute="trailing" constant="15" id="VFn-HS-aMK"/>
                             <constraint firstItem="Qx2-rP-dOQ" firstAttribute="leading" secondItem="NcN-JT-SeD" secondAttribute="leading" constant="15" id="bIh-St-6TD"/>
                             <constraint firstItem="Qx2-rP-dOQ" firstAttribute="height" secondItem="NcN-JT-SeD" secondAttribute="height" multiplier="0.4" id="bPJ-EF-OiK"/>
+                            <constraint firstItem="hHd-Pg-wdl" firstAttribute="leading" secondItem="9oB-fu-dAt" secondAttribute="leading" id="dHO-Kd-a39"/>
                             <constraint firstItem="dAr-LB-Obb" firstAttribute="leading" secondItem="9oB-fu-dAt" secondAttribute="trailing" constant="15" id="dlg-en-Gzi"/>
                             <constraint firstItem="9oB-fu-dAt" firstAttribute="top" secondItem="GEr-Co-3fY" secondAttribute="bottom" constant="15" id="f7E-ya-xub"/>
+                            <constraint firstItem="f3l-gq-iKc" firstAttribute="centerY" secondItem="hHd-Pg-wdl" secondAttribute="centerY" id="ff0-5u-VgB"/>
                             <constraint firstItem="Qx2-rP-dOQ" firstAttribute="top" secondItem="9oB-fu-dAt" secondAttribute="bottom" constant="20" id="jHk-Dq-cdR"/>
                             <constraint firstItem="A4q-Bo-g3w" firstAttribute="centerY" secondItem="dAr-LB-Obb" secondAttribute="centerY" id="jMx-KJ-JEO"/>
                             <constraint firstAttribute="trailing" secondItem="Qx2-rP-dOQ" secondAttribute="trailing" constant="15" id="k5C-v0-rmB"/>
@@ -715,9 +730,12 @@
                     <connections>
                         <outlet property="countdownLabel" destination="A4q-Bo-g3w" id="cR7-yL-gJT"/>
                         <outlet property="nameLabel" destination="dAr-LB-Obb" id="IyQ-jJ-e4p"/>
+                        <outlet property="replyingToLabel" destination="hHd-Pg-wdl" id="GGG-KH-N58"/>
+                        <outlet property="replyingToScreename" destination="f3l-gq-iKc" id="q15-ag-1xm"/>
                         <outlet property="screenNameLabel" destination="coH-BW-VHE" id="diR-FB-ABK"/>
                         <outlet property="thumbNailImageLabel" destination="9oB-fu-dAt" id="ij8-RF-NVM"/>
                         <outlet property="tweetEntryTextField" destination="Qx2-rP-dOQ" id="7Df-Bf-iM2"/>
+                        <outlet property="tweetEntryVerticalDistanceToThumbnailImageConstraint" destination="jHk-Dq-cdR" id="jWx-WV-5l5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izI-Og-9Mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -766,7 +784,7 @@
         <image name="closeX" width="22" height="22"/>
         <image name="compose" width="22" height="22"/>
         <image name="favorite_icon" width="10" height="10"/>
-        <image name="logout" width="22" height="22"/>
+        <image name="logout" width="19" height="19"/>
         <image name="reply_icon" width="10" height="10"/>
         <image name="retweet_icon" width="10" height="10"/>
     </resources>
