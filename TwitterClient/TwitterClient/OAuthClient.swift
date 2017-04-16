@@ -17,6 +17,11 @@ let kOAuthBaseURL  = "https://api.twitter.com"
 class OAuthClient : BDBOAuth1SessionManager {
     
     
-   static let sharedInstance = OAuthClient(baseURL: URL(string: kOAuthBaseURL)!, consumerKey: kOAuthConsumerKey, consumerSecret: kOAuthConsumerSecret)!;
+    static var sharedInstance : OAuthClient  {
+        
+        let instance = OAuthClient(baseURL: URL(string: kOAuthBaseURL)!, consumerKey: kOAuthConsumerKey, consumerSecret: kOAuthConsumerSecret)!;
+        instance.requestSerializer.timeoutInterval = 10.0
+        return instance
+    }
     
 }

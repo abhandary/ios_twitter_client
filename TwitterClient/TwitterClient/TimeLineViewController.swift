@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 
 class TimeLineViewController: UIViewController  {
@@ -21,6 +22,7 @@ class TimeLineViewController: UIViewController  {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var networkErrorView: UIView!
     var tweets : [Tweet]?
     var refreshControl : UIRefreshControl!
 
@@ -42,18 +44,38 @@ class TimeLineViewController: UIViewController  {
         self.tableView.estimatedRowHeight = 200
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
+        self.networkErrorView.isHidden = true
         reloadTable()
         
     }
 
+    func showNetworkError() {
+
+        UIView.transition(with: networkErrorView,
+                          duration: 0.6,
+                          options: .transitionCrossDissolve,
+                          animations: { self.networkErrorView.isHidden = false },
+                          completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            UIView.transition(with: self.networkErrorView,
+                              duration: 0.6,
+                              options: .transitionCrossDissolve,
+                              animations: { self.networkErrorView.isHidden = true },
+                              completion: nil)
+        }
+    }
+    
     func reloadTable() {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
+
         UserAccount.currentUserAccount?.fetchTweets(success: { (tweets) in
+                hud.hide(animated: true);
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
             }, error: { (receivedError) in
-                
-                // @todo: show error banner
+                hud.hide(animated: true);
+                self.showNetworkError()
                 self.refreshControl.endRefreshing()
                 print(receivedError)
         })
@@ -224,12 +246,15 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
                 isMoreDataLoading = true
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
                 UserAccount.currentUserAccount?.fetchTweetsOlderThanLastFetch(success: { (tweets) in
+                    hud.hide(animated: true);
                     self.isMoreDataLoading = false
                     self.tweets?.append(contentsOf: tweets)
                     self.tableView.reloadData()
                     }, error: { (receivedError) in
                         self.isMoreDataLoading = false
+                        hud.hide(animated: true);                        
                         // @todo: show error banner
                         print(receivedError)
                 })

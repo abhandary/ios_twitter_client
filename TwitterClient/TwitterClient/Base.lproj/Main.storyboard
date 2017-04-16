@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -593,11 +594,53 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="723-lE-5r4">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Zv-qc-X10">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5X-O7-Xvl">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="124" id="cqb-A6-WYD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-error" highlightedImage="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="x8i-Gi-Kan">
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="x8i-Gi-Kan" secondAttribute="height" multiplier="1:1" id="VSv-If-dJu"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="x8i-Gi-Kan" firstAttribute="top" secondItem="2Zv-qc-X10" secondAttribute="top" constant="15" id="BY5-Ff-uTg"/>
+                                            <constraint firstItem="U5X-O7-Xvl" firstAttribute="top" secondItem="2Zv-qc-X10" secondAttribute="top" id="UCW-FQ-QA8"/>
+                                            <constraint firstAttribute="trailing" secondItem="U5X-O7-Xvl" secondAttribute="trailing" constant="10" id="YR9-by-lJe"/>
+                                            <constraint firstAttribute="bottom" secondItem="U5X-O7-Xvl" secondAttribute="bottom" id="deB-hV-H2p"/>
+                                            <constraint firstAttribute="width" constant="194" id="ket-Gk-Zae"/>
+                                            <constraint firstItem="x8i-Gi-Kan" firstAttribute="leading" secondItem="2Zv-qc-X10" secondAttribute="leading" constant="15" id="mmQ-u5-twY"/>
+                                            <constraint firstAttribute="bottom" secondItem="x8i-Gi-Kan" secondAttribute="bottom" constant="15" id="sZg-8L-feZ"/>
+                                            <constraint firstAttribute="height" constant="50" id="vnU-F9-Jrc"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6jM-0H-so1"/>
+                                    <constraint firstItem="2Zv-qc-X10" firstAttribute="centerY" secondItem="723-lE-5r4" secondAttribute="centerY" id="Fgm-Ep-XaB"/>
+                                    <constraint firstItem="2Zv-qc-X10" firstAttribute="centerX" secondItem="723-lE-5r4" secondAttribute="centerX" id="qUK-ct-9eA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="N9T-m4-13k" firstAttribute="top" secondItem="kb4-Gm-PAW" secondAttribute="bottom" id="6Ih-PO-gws"/>
                             <constraint firstItem="N9T-m4-13k" firstAttribute="leading" secondItem="eMe-yr-DFK" secondAttribute="leading" id="W9b-4M-2qA"/>
+                            <constraint firstItem="4J9-ID-z13" firstAttribute="top" secondItem="723-lE-5r4" secondAttribute="bottom" constant="50" id="WYQ-QH-pHT"/>
+                            <constraint firstAttribute="trailing" secondItem="723-lE-5r4" secondAttribute="trailing" id="gI5-Bb-sMd"/>
+                            <constraint firstItem="723-lE-5r4" firstAttribute="leading" secondItem="eMe-yr-DFK" secondAttribute="leading" id="oiM-9a-POt"/>
                             <constraint firstAttribute="trailing" secondItem="N9T-m4-13k" secondAttribute="trailing" id="pWB-BM-gRP"/>
                             <constraint firstItem="4J9-ID-z13" firstAttribute="top" secondItem="N9T-m4-13k" secondAttribute="bottom" id="x5z-Xi-9Yi"/>
                         </constraints>
@@ -615,6 +658,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="networkErrorView" destination="723-lE-5r4" id="ZD8-aS-8vC"/>
                         <outlet property="tableView" destination="N9T-m4-13k" id="S0O-6i-QxW"/>
                         <segue destination="NC6-Ny-UKg" kind="showDetail" identifier="tweetReplySegue" id="axH-Rw-TLv"/>
                     </connections>
@@ -945,6 +989,7 @@
     <resources>
         <image name="closeX" width="22" height="22"/>
         <image name="compose" width="22" height="22"/>
+        <image name="error_icon" width="30" height="30"/>
         <image name="favorite_icon" width="10" height="10"/>
         <image name="logout" width="19" height="19"/>
         <image name="notretweeted" width="15" height="10"/>
@@ -952,9 +997,10 @@
         <image name="retweet_icon" width="10" height="10"/>
         <image name="retweeted_dark" width="15" height="10"/>
         <image name="unfavorite_heart" width="11" height="8"/>
+        <image name="white-error" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2tX-pb-sw9"/>
-        <segue reference="bl8-Mj-P9g"/>
+        <segue reference="axH-Rw-TLv"/>
     </inferredMetricsTieBreakers>
 </document>
