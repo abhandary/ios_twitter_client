@@ -12,7 +12,9 @@ import Foundation
 let kHomeTimeLine      = "1.1/statuses/home_timeline.json"
 let kVerifyCredentials = "1.1/account/verify_credentials.json"
 let kPostStatusUpdate  = "1.1/statuses/update.json"
-
+let kRetweet           = "1.1/statuses/retweet/%lld.json"
+let kFavorites         = "1.1/favorites/create.json"
+let kUnfavorites       = "1.1/favorites/destroy.json"
 
 
 let kCountParam = "count"
@@ -77,6 +79,71 @@ class UserTimeLineService {
         let params = ["status" : statusUpdate.tweetText!]
         postStatusUpdate(params: params, success: success, error: error)
     }
+    
+
+    func post(retweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        
+        let requestURLString = String(format: kRetweet, retweetID)
+        let params = ["id" : retweetID]
+        OAuthClient.sharedInstance.post(requestURLString,
+                                        parameters: params,
+                                        progress: nil,
+                                        success: { (task, response) in
+                                            print(response)
+                                            if let dictionary = response as? NSDictionary {
+                                                let tweet = Tweet(dictionary: dictionary);
+                                                success(tweet)
+                                            } else {
+                                                error(NSError(domain: "unable to post tweet", code: 0, userInfo: nil))
+                                            }
+        }) { (task, receivedError) in
+            error(receivedError)
+        }
+
+    }
+
+    func post(favoriteTweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        
+
+        let params = ["id" : favoriteTweetID]
+        OAuthClient.sharedInstance.post(kFavorites,
+                                        parameters: params,
+                                        progress: nil,
+                                        success: { (task, response) in
+                                            print(response)
+                                            if let dictionary = response as? NSDictionary {
+                                                let tweet = Tweet(dictionary: dictionary);
+                                                success(tweet)
+                                            } else {
+                                                error(NSError(domain: "unable to post tweet", code: 0, userInfo: nil))
+                                            }
+        }) { (task, receivedError) in
+            error(receivedError)
+        }
+    }
+
+    
+    func post(unfavoriteTweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
+        
+        
+        let params = ["id" : unfavoriteTweetID]
+        OAuthClient.sharedInstance.post(kUnfavorites,
+                                        parameters: params,
+                                        progress: nil,
+                                        success: { (task, response) in
+                                            print(response)
+                                            if let dictionary = response as? NSDictionary {
+                                                let tweet = Tweet(dictionary: dictionary);
+                                                success(tweet)
+                                            } else {
+                                                error(NSError(domain: "unable to post tweet", code: 0, userInfo: nil))
+                                            }
+        }) { (task, receivedError) in
+            error(receivedError)
+        }
+        
+    }
+
     
     
     // MARK: - internal tweets

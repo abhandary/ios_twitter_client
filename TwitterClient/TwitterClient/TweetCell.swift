@@ -8,10 +8,14 @@
 
 import UIKit
 
-
+@objc protocol TweetCellDelegate {
+    func retweetTapped(sender : TweetCell)
+    func favoriteTapped(sender : TweetCell)
+}
 
 class TweetCell: UITableViewCell {
 
+    weak var delegate : TweetCellDelegate?
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var handle: UILabel!
@@ -88,7 +92,14 @@ class TweetCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let retweetTapGS = UITapGestureRecognizer(target: self, action: #selector(retweetTapped))
+        self.retweetImageView.isUserInteractionEnabled = true
+        self.retweetImageView?.addGestureRecognizer(retweetTapGS)
+        
+        let favoriteTapGS = UITapGestureRecognizer(target: self, action: #selector(favoriteTapped))
+        self.favoriteImage.isUserInteractionEnabled = true
+        self.favoriteImage?.addGestureRecognizer(favoriteTapGS)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -96,5 +107,24 @@ class TweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func retweetTapped() {
+        self.delegate?.retweetTapped(sender: self)
+    }
+    
+    func favoriteTapped() {
+        self.delegate?.favoriteTapped(sender: self)
+    }
 
+    func updateRetweetDisplay() {
+        retweetCountLabel.text = String(tweet.retweetCount!)
+        self.setNeedsDisplay()
+    }
+
+    func updateFavoritesDisplay() {
+        favoriteLabel.text = String(tweet.user!.favoritesCount!)
+        self.setNeedsDisplay()
+    }
+
+    
 }

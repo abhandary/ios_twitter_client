@@ -12,6 +12,8 @@ class TweetDetailViewController: UIViewController {
 
     var tweet : Tweet?
     
+    var tweetCell : TweetCell?
+    
     @IBOutlet weak var thumbNailImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var screenName: UILabel!
@@ -62,12 +64,15 @@ class TweetDetailViewController: UIViewController {
             
             // add gesture recognizers
             let replyImageTapGS = UITapGestureRecognizer(target: self, action: #selector(replyImageTapped))
+            replyImageView.isUserInteractionEnabled = true
             replyImageView.addGestureRecognizer(replyImageTapGS)
 
             let retweetImageTapGS = UITapGestureRecognizer(target: self, action: #selector(retweetImageTapped))
+            retweetImageView.isUserInteractionEnabled = true
             retweetImageView.addGestureRecognizer(retweetImageTapGS)
 
             let favoritesImageTapGS = UITapGestureRecognizer(target: self, action: #selector(likeImageTapped))
+            favoritesImageView.isUserInteractionEnabled = true
             favoritesImageView.addGestureRecognizer(favoritesImageTapGS)
         }
         // Do any additional setup after loading the view.
@@ -78,14 +83,77 @@ class TweetDetailViewController: UIViewController {
     }
 
     func retweetImageTapped() {
-        print("retweetImageTapped")
+
+        if let tweet = tweet,
+            let tweetID = tweet.tweetID {
+            UserAccount.currentUserAccount?.post(retweetID: tweetID, success: { (receivedTweet) in
+                self.incrementRetweetCountAndUpdateDisplay()
+                // @todo: insert tweet into timeline
+                }, error: { (error) in
+                    // @todod: show error banner
+                    print(error)
+            })
+        }
     }
 
     func likeImageTapped() {
-        print("likeImageTapped")
+        if let tweet = tweet,
+            let tweetID = tweet.tweetID {
+            
+            if tweet.favorited! == false {
+                UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: { (receivedTweet) in
+                        tweet.favorited = receivedTweet.favorited
+                        self.incrementFavoriteCountAndUpdateDisplay()
+                    }, error: { (error) in
+                        // @todod: show error banner
+                        print(error)
+                })
+            } else {
+                UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: { (receivedTweet) in
+                        tweet.favorited = receivedTweet.favorited
+                        self.decrementFavoriteCountAndUpdateDisplay()
+                    }, error: { (error) in
+                        // @todod: show error banner
+                        print(error)
+                })
+            }
+        }
     }
 
     
+    func incrementRetweetCountAndUpdateDisplay() {
+        
+        if let tweet = tweet {
+            tweet.retweetCount = tweet.retweetCount! + 1
+            numberOfRetweetsLabel.text = String(tweet.retweetCount!)
+            if let tweetCell = tweetCell {
+                tweetCell.updateRetweetDisplay()
+            }
+        }
+    }
+
+    func incrementFavoriteCountAndUpdateDisplay() {
+        
+        if let tweet = tweet {
+            tweet.user!.favoritesCount = tweet.user!.favoritesCount! + 1
+            numberOfLikesLabel.text = String(tweet.user!.favoritesCount!)
+            if let tweetCell = tweetCell {
+                tweetCell.updateFavoritesDisplay()
+            }
+        }
+    }
+
+    func decrementFavoriteCountAndUpdateDisplay() {
+        
+        if let tweet = tweet {
+            tweet.user!.favoritesCount = max(tweet.user!.favoritesCount! - 1, 0)
+            numberOfLikesLabel.text = String(tweet.user!.favoritesCount!)
+            if let tweetCell = tweetCell {
+                tweetCell.updateFavoritesDisplay()
+            }
+        }
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

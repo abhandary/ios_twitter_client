@@ -16,16 +16,20 @@ class Tweet {
     var tweetDate : Date?
     var retweetCount : Int?
 
+    // https://courses.codepath.com/courses/intro_to_ios/pages/unretweeting
+    var originalTweetIDStr : String?
+    
     let kMonthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
     var retweeted : Bool?
+    var favorited : Bool?
     
     var user : User?
     
     static let dateFormatter = DateFormatter()
     
     init(dictionary : NSDictionary) {
-
+        print(dictionary)
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
 
@@ -44,6 +48,25 @@ class Tweet {
         if let id = dictionary["id"] as? Int {
             tweetID = id
         }
+        
+
+        if let retweetedInt = dictionary["retweeted"] as? Int {
+            retweeted = retweetedInt == 1 ? true : false
+            
+            // extract the original id str if this is a retweet
+            if retweeted == true {
+                if let retweetedStatus = dictionary["retweeted_status"] as? [String : Any] {
+                    // retweeted tweet
+                    originalTweetIDStr = retweetedStatus["id_str"] as? String
+                } else {
+                    originalTweetIDStr = dictionary["id_str"] as? String
+                }
+            }
+        }
+        
+        if let favoritedInt = dictionary["favorited"] as? Int {
+            favorited = favoritedInt == 1 ? true : false 
+        }
     }
     
     func timeString() -> String {
@@ -59,10 +82,6 @@ class Tweet {
         let tweetMonth = calendar.component(.month, from: tweetDate!)
         let tweetDay   = calendar.component(.day, from: tweetDate!)
         
-        if user!.screename! == "axa_bhandary" {
-            print(tweetDate)
-            print(now)
-        }
         // if this tweet wasn't today, then return label as "MMM d"
         if tweetDay != today {
             qualifiedTime = "\(kMonthsOfYear[tweetMonth + 1]) \(tweetDay)"

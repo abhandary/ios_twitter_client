@@ -9,7 +9,7 @@
 import UIKit
 
 
-class TimeLineViewController: UIViewController {
+class TimeLineViewController: UIViewController  {
 
     
     static let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
@@ -85,15 +85,63 @@ class TimeLineViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == kTweetDetailSegue,
-            let cell = sender as? UITableViewCell,
+            let cell = sender as? TweetCell,
             let detailVC = segue.destination as? TweetDetailViewController,
             let indexPath = self.tableView.indexPath(for: cell) {
             self.tableView.deselectRow(at: indexPath, animated: true)
             detailVC.tweet = self.tweets![indexPath.row]
+            detailVC.tweetCell = cell
         } 
     }
 }
 
+
+
+extension TimeLineViewController : TweetCellDelegate {
+    
+    func retweetTapped(sender : TweetCell) {
+        
+        if  let tweetID = sender.tweet.tweetID {
+            UserAccount.currentUserAccount?.post(retweetID: tweetID, success: { (tweet) in
+                    sender.tweet.retweetCount = sender.tweet.retweetCount! + 1
+                    sender.updateRetweetDisplay()
+                    // @todo: insert tweet into timeline
+                }, error: { (error) in
+                    // @todod: show error banner
+                    print(error)
+            })
+        }
+    }
+    
+    func favoriteTapped(sender: TweetCell) {
+        
+        if  let tweetID = sender.tweet.tweetID {
+            
+            if sender.tweet.favorited! == true {
+                UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: { (tweet) in
+                    sender.tweet.favorited = tweet.favorited!
+                    sender.tweet.user!.favoritesCount = sender.tweet.user!.favoritesCount! + 1
+                    sender.updateFavoritesDisplay()
+                    // @todo: insert tweet into timeline
+                    }, error: { (error) in
+                        // @todod: show error banner
+                        print(error)
+                })
+            } else {
+                UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: { (tweet) in
+                    
+                    sender.tweet.favorited = tweet.favorited!
+                    sender.tweet.user!.favoritesCount = max(sender.tweet.user!.favoritesCount! - 1, 0)
+                    sender.updateFavoritesDisplay()
+                    // @todo: insert tweet into timeline
+                    }, error: { (error) in
+                        // @todod: show error banner
+                        print(error)
+                })
+            }
+        }
+    }
+}
 
 extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
     
@@ -107,6 +155,7 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
         cell.tweet = self.tweets![indexPath.row]
+        cell.delegate = self
         return cell
     }
     
