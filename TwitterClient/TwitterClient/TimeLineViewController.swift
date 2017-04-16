@@ -84,6 +84,7 @@ class TimeLineViewController: UIViewController  {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == kTweetDetailSegue,
             let cell = sender as? TweetCell,
             let detailVC = segue.destination as? TweetDetailViewController,
@@ -91,13 +92,16 @@ class TimeLineViewController: UIViewController  {
             self.tableView.deselectRow(at: indexPath, animated: true)
             detailVC.tweet = self.tweets![indexPath.row]
             detailVC.tweetCell = cell
-        } else if segue.identifier == kTweetReplySegue,
+        }
+        
+        else if segue.identifier == kTweetReplySegue,
             let cell = sender as? TweetCell,
             let navVC = segue.destination as? UINavigationController,
             let composeVC = navVC.topViewController as? TweetComposeViewController,
             let tweetID = cell.tweet.tweetID {
             
             composeVC.inReplyToID = tweetID
+            composeVC.inReplyToScreenName = cell.tweet.user?.screename
         }
     }
 }
@@ -179,7 +183,9 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
  
         guard self.tweets != nil else { return; }
         guard self.tweets!.count > 0 else { return; }
+    
         
+        // --- infinite scrolling ----
         if (!isMoreDataLoading) {
             // Calculate the position of one screen length before the bottom of the results
             let scrollViewContentHeight = tableView.contentSize.height

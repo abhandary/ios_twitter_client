@@ -16,6 +16,7 @@ class TweetComposeViewController: UIViewController {
     
     var user : User?
     var inReplyToID : Int?
+    var inReplyToScreenName : String?
     var postedTweet : Tweet?
     
     @IBOutlet weak var tweetEntryTextField: UITextView!
@@ -41,6 +42,7 @@ class TweetComposeViewController: UIViewController {
             replyingToScreename.isHidden = false
             replyingToLabel.isHidden = false
             tweetEntryVerticalDistanceToThumbnailImageConstraint.constant = 50
+            replyingToScreename.text = inReplyToScreenName
         } else {
             replyingToScreename.isHidden = true
             replyingToLabel.isHidden = true
