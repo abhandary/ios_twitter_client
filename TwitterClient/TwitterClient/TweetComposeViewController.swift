@@ -71,7 +71,7 @@ class TweetComposeViewController: UIViewController {
         
             let successBlock : (Tweet)->() = { (receivedTweet) in
                 self.postedTweet = receivedTweet
-                print(receivedTweet.dictionary)
+                // print(receivedTweet.dictionary)
                 self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
             }
             

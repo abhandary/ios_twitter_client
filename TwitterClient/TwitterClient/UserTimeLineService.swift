@@ -99,7 +99,7 @@ class UserTimeLineService {
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
-                                            print(response)
+                                           // print(response)
                                             if let dictionary = response as? NSDictionary {
                                                 let tweet = Tweet(dictionary: dictionary);
                                                 success(tweet)
@@ -119,7 +119,7 @@ class UserTimeLineService {
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
-                                            print(response)
+                                           // print(response)
                                             if let dictionary = response as? NSDictionary {
                                                 let tweet = Tweet(dictionary: dictionary);
                                                 success(tweet)
@@ -140,7 +140,7 @@ class UserTimeLineService {
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
-                                            print(response)
+                                           // print(response)
                                             if let dictionary = response as? NSDictionary {
                                                 let tweet = Tweet(dictionary: dictionary);
                                                 success(tweet)
@@ -161,7 +161,7 @@ class UserTimeLineService {
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
-                                            print(response)
+                                           // print(response)
                                             if let dictionary = response as? NSDictionary {
                                                 let tweet = Tweet(dictionary: dictionary);
                                                 success(tweet)
@@ -184,7 +184,7 @@ class UserTimeLineService {
                                        parameters: params,
                                        progress: nil,
                                        success: { (task, response) in
-                                        print(response)
+                                      //  print(response)
                                         if let dictionary = response as? NSDictionary {
                                             let tweet = Tweet(dictionary: dictionary);
                                             success(tweet)

@@ -20,7 +20,7 @@ class OAuthClient : BDBOAuth1SessionManager {
     static var sharedInstance : OAuthClient  {
         
         let instance = OAuthClient(baseURL: URL(string: kOAuthBaseURL)!, consumerKey: kOAuthConsumerKey, consumerSecret: kOAuthConsumerSecret)!;
-        instance.requestSerializer.timeoutInterval = 10.0
+        instance.requestSerializer.timeoutInterval = 5.0
         return instance
     }
     

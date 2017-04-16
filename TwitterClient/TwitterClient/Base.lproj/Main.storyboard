@@ -130,7 +130,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dMS-lR-QkG" id="0Zk-5t-FEG">
-                                            <frame key="frameInset" width="375" height="195"/>
+                                            <frame key="frameInset" width="375" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0p-IT-VUP" userLabel="Name and Text View">
@@ -271,7 +271,7 @@
                                         <rect key="frame" x="0.0" y="224" width="375" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii1-ez-5q2" id="LS4-JD-sHD">
-                                            <frame key="frameInset" width="375" height="195"/>
+                                            <frame key="frameInset" width="375" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TN-2h-vRY" userLabel="Name and Text View">
@@ -471,12 +471,12 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWa-cQ-lTh">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="4h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWa-cQ-lTh">
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did you know that you can tell if someone is a programmer simplying by saying the word &quot;timezones&quot; and seeing if they cringe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oq1-mB-tbI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Did you know that you can tell if someone is a programmer simplying by saying the word &quot;timezones&quot; and seeing if they cringe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oq1-mB-tbI">
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -757,8 +757,8 @@
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nyb-8T-oap">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="DaF-1a-WPF"/>
-                                            <constraint firstAttribute="height" constant="20" id="crW-sr-qGd"/>
+                                            <constraint firstAttribute="width" constant="13" id="DaF-1a-WPF"/>
+                                            <constraint firstAttribute="height" constant="13" id="crW-sr-qGd"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zkz-ug-ndc">
@@ -769,12 +769,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notretweeted" translatesAutoresizingMaskIntoConstraints="NO" id="F1r-73-MB6">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="6s8-Gv-WjL"/>
-                                            <constraint firstAttribute="height" constant="15" id="xrV-2N-9y2"/>
+                                            <constraint firstAttribute="height" constant="13" id="xrV-2N-9y2"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unfavorite_heart" translatesAutoresizingMaskIntoConstraints="NO" id="wcf-iR-GVU">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="7yN-Vx-Vho"/>
+                                            <constraint firstAttribute="height" constant="13" id="7yN-Vx-Vho"/>
                                             <constraint firstAttribute="width" constant="15" id="CoD-WX-K7M"/>
                                         </constraints>
                                     </imageView>
@@ -1000,7 +1000,7 @@
         <image name="white-error" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2tX-pb-sw9"/>
         <segue reference="axH-Rw-TLv"/>
+        <segue reference="2tX-pb-sw9"/>
     </inferredMetricsTieBreakers>
 </document>
