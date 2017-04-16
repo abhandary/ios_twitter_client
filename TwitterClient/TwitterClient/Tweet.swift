@@ -17,6 +17,7 @@ class Tweet {
     var retweetCount : Int?
     var favoritesCount : Int?
     
+    var inReplyToScreenname : String?
 
     // https://courses.codepath.com/courses/intro_to_ios/pages/unretweeting
     var originalTweetID : String?
@@ -30,8 +31,11 @@ class Tweet {
     
     static let dateFormatter = DateFormatter()
     
+    var dictionary : NSDictionary!
+    
     init(dictionary : NSDictionary) {
         print(dictionary)
+        self.dictionary = dictionary
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
 
@@ -70,6 +74,8 @@ class Tweet {
         if let favoritedInt = dictionary["favorited"] as? Int {
             favorited = favoritedInt == 1 ? true : false 
         }
+        
+        inReplyToScreenname = dictionary["in_reply_to_screen_name"] as? String
     }
     
     func updateWith(tweet : Tweet) {

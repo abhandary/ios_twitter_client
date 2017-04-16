@@ -26,6 +26,7 @@
 		E2C7AE721EA1976D00B4384A /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */; };
 		E2C7AE741EA1977800B4384A /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */; };
 		E2C7AE761EA2AF5900B4384A /* StatusUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE751EA2AF5900B4384A /* StatusUpdate.swift */; };
+		E2EB64AA1EA3E6C200D9A232 /* ReplyTweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EB64A91EA3E6C200D9A232 /* ReplyTweetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
 		E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailViewController.swift; sourceTree = "<group>"; };
 		E2C7AE751EA2AF5900B4384A /* StatusUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusUpdate.swift; sourceTree = "<group>"; };
+		E2EB64A91EA3E6C200D9A232 /* ReplyTweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyTweetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */,
 				E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */,
 				E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */,
+				E2EB64A91EA3E6C200D9A232 /* ReplyTweetCell.swift */,
 			);
 			name = "UI Layer";
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				E2154E501E9F482800C8CEF2 /* OAuthClient.swift in Sources */,
 				E2154E621EA0640B00C8CEF2 /* Tweet.swift in Sources */,
 				E2C7AE761EA2AF5900B4384A /* StatusUpdate.swift in Sources */,
+				E2EB64AA1EA3E6C200D9A232 /* ReplyTweetCell.swift in Sources */,
 				E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */,
 				E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */,
 				E2C7AE741EA1977800B4384A /* TweetDetailViewController.swift in Sources */,

@@ -13,10 +13,11 @@ let kHomeTimeLine      = "1.1/statuses/home_timeline.json"
 let kVerifyCredentials = "1.1/account/verify_credentials.json"
 let kPostStatusUpdate  = "1.1/statuses/update.json"
 let kRetweet           = "1.1/statuses/retweet/%lld.json"
-let kUnretweet         = "1.1/statuses/unretweet/%lld.json"
+let kUnretweet         = "1.1/statuses/unretweet/%@.json"
 let kFavorites         = "1.1/favorites/create.json"
 let kUnfavorites       = "1.1/favorites/destroy.json"
-let kRetweeters        = "1.1/statuses/retweeters/ids.json"
+let kStatuesShow       = "1.1/statuses/show.json"
+
 
 let kCountParam = "count"
 let kMaxIDParam = "max_id"
@@ -72,11 +73,6 @@ class UserTimeLineService {
         }
     }
     
-    func get(retweetsForTweetID: Int, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        let params = ["id" : retweetsForTweetID]
-        
-    }
-    
     func post(statusUpdate : String, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         let params = ["status" : statusUpdate]
         postStatusUpdate(params: params, success: success, error: error)
@@ -113,22 +109,43 @@ class UserTimeLineService {
     
     func post(unretweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         
-        let requestURLString = String(format: kUnretweet, unretweetID)
-        let params = ["id" : unretweetID]
-        OAuthClient.sharedInstance.post(requestURLString,
+
+        let params = ["id" : unretweetID, "include_my_retweet" : 1]
+        
+        OAuthClient.sharedInstance.get(kStatuesShow,
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
                                             print(response)
-                                            if let dictionary = response as? NSDictionary {
-                                                let tweet = Tweet(dictionary: dictionary);
-                                                success(tweet)
+                                            if let dictionary = response as? NSDictionary,
+                                                let currentUserRetweet = dictionary["current_user_retweet"] as? NSDictionary,
+                                                let idStr = currentUserRetweet["id_str"] as? String {
+                                                let requestURLString = String(format: kUnretweet, idStr)
+                                                
+                                                // let params = ["id" : unretweetID]
+                                                
+                                                OAuthClient.sharedInstance.post(requestURLString,
+                                                                                parameters: params,
+                                                                                progress: nil,
+                                                                                success: { (task, response) in
+                                                                                    print(response)
+                                                                                    if let dictionary = response as? NSDictionary {
+                                                                                        let tweet = Tweet(dictionary: dictionary);
+                                                                                        success(tweet)
+                                                                                    } else {
+                                                                                        error(NSError(domain: "unable to untweet", code: 0, userInfo: nil))
+                                                                                    }
+                                                }) { (task, receivedError) in
+                                                    error(receivedError)
+                                                }
+                                                
                                             } else {
                                                 error(NSError(domain: "unable to post tweet", code: 0, userInfo: nil))
                                             }
-        }) { (task, receivedError) in
-            error(receivedError)
-        }
+        
+                                        }) { (task, receivedError) in
+                                            error(receivedError)
+                                        }
     }
 
 

@@ -67,10 +67,11 @@ class TweetComposeViewController: UIViewController {
     @IBAction func tweetButtonTapped(_ sender: AnyObject) {
 
         
-        if let tweetText = self.tweetEntryTextField.text {
+        if var tweetText = self.tweetEntryTextField.text {
         
             let successBlock : (Tweet)->() = { (receivedTweet) in
                 self.postedTweet = receivedTweet
+                print(receivedTweet.dictionary)
                 self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
             }
             
@@ -79,6 +80,7 @@ class TweetComposeViewController: UIViewController {
             }
 
             if let inReplyToID = inReplyToID {
+                tweetText = "@\(inReplyToScreenName!) \(tweetText)"
                 UserAccount.currentUserAccount?.post(statusUpdate: tweetText, inReplyTo: inReplyToID, success: successBlock, error: errorBlock)
             } else {
                 UserAccount.currentUserAccount?.post(statusUpdate: tweetText, success: successBlock, error: errorBlock)

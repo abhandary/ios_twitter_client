@@ -14,6 +14,7 @@ class TimeLineViewController: UIViewController  {
     
     static let kNotificationUserLoggedOut = "kNotificationUserLoggedOut"
     let kTweetDetailSegue = "tweetDetailSegue"
+    let kTweetDetailSegueFromReplyToCell = "tweetDetailSegueFromReplyToCell"
     let kTweetComposeSegue = "tweetComposeSegue"
     let kTweetReplySegue = "tweetReplySegue"
     
@@ -85,7 +86,8 @@ class TimeLineViewController: UIViewController  {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == kTweetDetailSegue,
+        if segue.identifier == kTweetDetailSegue ||
+           segue.identifier == kTweetDetailSegueFromReplyToCell,
             let cell = sender as? TweetCell,
             let detailVC = segue.destination as? TweetDetailViewController,
             let indexPath = self.tableView.indexPath(for: cell) {
@@ -115,11 +117,13 @@ extension TimeLineViewController : TweetCellDelegate {
         let retweetSuccessBlock : (Tweet) -> () = { (receivedTweet)  in
             sender.tweet.updateWith(tweet: receivedTweet)
             sender.updateRetweetDisplay()
+            // self.tweets?.insert(receivedTweet, at: 0)
+            // self.tableView.reloadData()
         }
 
         let unretweetSuccessBlock : (Tweet) -> () = { (receivedTweet)  in
             sender.tweet.updateWith(tweet: receivedTweet)
-            sender.tweet.retweeted = false
+            // sender.tweet.retweeted = false
             sender.updateRetweetDisplay()
         }
 
@@ -186,7 +190,15 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
             cell.tweet = self.tweets![indexPath.row]
             cell.delegate = self
             return cell
-        } else {
+        } else if let _ = tweet.inReplyToScreenname,
+            let userID = tweet.user!.userID,
+            userID == User.currentUser!.userID! {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "ReplyTweetCell") as! ReplyTweetCell
+            cell.tweet = self.tweets![indexPath.row]
+            cell.delegate = self
+            return cell
+        }
+        else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
             cell.tweet = self.tweets![indexPath.row]
             cell.delegate = self

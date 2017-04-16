@@ -20,8 +20,7 @@ class RetweetCell: TweetCell {
     override var tweet: Tweet! {
         didSet {
             updateCellOnTweetSet()
-            print(tweet.dictionary!)
-            retweetUserScreenName.text = "You Retweeted"
+            retweetUserScreenName.text = "Retweeted"
         }
     }
 

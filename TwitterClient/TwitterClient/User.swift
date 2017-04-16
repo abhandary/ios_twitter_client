@@ -16,7 +16,7 @@ class User  {
     var screename : String?
     var profileURL : URL?
     var tagline : String?
-
+    var userID : Int?
     
     var dictionary : NSDictionary?
     
@@ -28,8 +28,11 @@ class User  {
             profileURL = URL(string: urlString);
         }
         
-        tagline = dictionary["description"] as? String
+        if let idFromDict = dictionary["id"] as? Int {
+            userID = idFromDict
+        }
         
+        tagline = dictionary["description"] as? String
         
         self.dictionary = dictionary as NSDictionary
     }
