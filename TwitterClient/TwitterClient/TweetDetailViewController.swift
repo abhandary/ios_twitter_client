@@ -160,7 +160,7 @@ class TweetDetailViewController: UIViewController {
     func updateRetweetImage() {
         
         if let tweet = tweet {
-            // update favorite image as per favorite state
+            // update retweet image as per favorite state
             var newImage : UIImage!
             if let retweeted = tweet.retweeted,
                 retweeted == true {
@@ -184,16 +184,13 @@ class TweetDetailViewController: UIViewController {
     func updateFavoritesImage() {
         
         if let tweet = tweet {
-            // likes count
             // update favorite image as per favorite state
             var newImage : UIImage!
             if let favorited = tweet.favorited,
                 favorited == true {
                 newImage = UIImage(named: kFavoritedImage)
-                // favoriteImage.image = UIImage(named: kFavoritedImage)
             } else {
                 newImage = UIImage(named: kUnfavoritedImage)
-                // favoriteImage.image = UIImage(named: kUnfavoritedImage)
             }
             
             UIView.transition(with: favoritesImageView,

@@ -897,13 +897,55 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejh-An-iDU">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbH-5H-Jmc">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7B-Ew-pXV">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="124" id="YU6-p0-b9X"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-error" highlightedImage="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Aow-L7-dJW">
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Aow-L7-dJW" secondAttribute="height" multiplier="1:1" id="HC2-su-Rxj"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Z7B-Ew-pXV" secondAttribute="trailing" constant="10" id="02t-Wb-5E3"/>
+                                            <constraint firstAttribute="bottom" secondItem="Aow-L7-dJW" secondAttribute="bottom" constant="15" id="45B-yC-W3G"/>
+                                            <constraint firstItem="Aow-L7-dJW" firstAttribute="top" secondItem="PbH-5H-Jmc" secondAttribute="top" constant="15" id="DP6-To-L9W"/>
+                                            <constraint firstAttribute="height" constant="50" id="MRD-Ta-Lcn"/>
+                                            <constraint firstAttribute="width" constant="194" id="Msm-Ml-4FM"/>
+                                            <constraint firstAttribute="bottom" secondItem="Z7B-Ew-pXV" secondAttribute="bottom" id="SJU-X5-B4p"/>
+                                            <constraint firstItem="Aow-L7-dJW" firstAttribute="leading" secondItem="PbH-5H-Jmc" secondAttribute="leading" constant="15" id="bSK-VZ-kHE"/>
+                                            <constraint firstItem="Z7B-Ew-pXV" firstAttribute="top" secondItem="PbH-5H-Jmc" secondAttribute="top" id="kan-Ow-EYF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BmA-Ci-g5H"/>
+                                    <constraint firstItem="PbH-5H-Jmc" firstAttribute="centerX" secondItem="ejh-An-iDU" secondAttribute="centerX" id="fms-SW-OQR"/>
+                                    <constraint firstItem="PbH-5H-Jmc" firstAttribute="centerY" secondItem="ejh-An-iDU" secondAttribute="centerY" id="nRo-Wc-7X3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="coH-BW-VHE" firstAttribute="top" secondItem="dAr-LB-Obb" secondAttribute="bottom" constant="6" id="1kF-1i-q5A"/>
                             <constraint firstItem="hHd-Pg-wdl" firstAttribute="top" secondItem="9oB-fu-dAt" secondAttribute="bottom" constant="8" id="6Td-YV-L55"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="f3l-gq-iKc" secondAttribute="trailing" constant="3" id="AgU-Hx-gMj"/>
+                            <constraint firstItem="ejh-An-iDU" firstAttribute="top" secondItem="f3l-gq-iKc" secondAttribute="bottom" id="C6M-Hl-8cs"/>
+                            <constraint firstAttribute="trailing" secondItem="ejh-An-iDU" secondAttribute="trailing" id="Cin-fe-DDg"/>
                             <constraint firstItem="f3l-gq-iKc" firstAttribute="leading" secondItem="hHd-Pg-wdl" secondAttribute="trailing" constant="8" id="GYz-hw-Or2"/>
+                            <constraint firstItem="ejh-An-iDU" firstAttribute="leading" secondItem="NcN-JT-SeD" secondAttribute="leading" id="IDA-gB-Ena"/>
                             <constraint firstItem="9oB-fu-dAt" firstAttribute="leading" secondItem="NcN-JT-SeD" secondAttribute="leading" constant="15" id="Jmy-ac-0SQ"/>
                             <constraint firstItem="dAr-LB-Obb" firstAttribute="centerY" secondItem="9oB-fu-dAt" secondAttribute="centerY" constant="-15" id="LTc-Md-oOQ"/>
                             <constraint firstAttribute="trailing" secondItem="A4q-Bo-g3w" secondAttribute="trailing" constant="10" id="Su1-pV-HTO"/>
@@ -936,6 +978,7 @@
                     <connections>
                         <outlet property="countdownLabel" destination="A4q-Bo-g3w" id="cR7-yL-gJT"/>
                         <outlet property="nameLabel" destination="dAr-LB-Obb" id="IyQ-jJ-e4p"/>
+                        <outlet property="networkErrorView" destination="ejh-An-iDU" id="yA5-WG-Bax"/>
                         <outlet property="replyingToLabel" destination="hHd-Pg-wdl" id="GGG-KH-N58"/>
                         <outlet property="replyingToScreename" destination="f3l-gq-iKc" id="q15-ag-1xm"/>
                         <outlet property="screenNameLabel" destination="coH-BW-VHE" id="diR-FB-ABK"/>

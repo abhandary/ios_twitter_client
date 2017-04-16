@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 
 
 class TweetComposeViewController: UIViewController {
@@ -19,6 +19,7 @@ class TweetComposeViewController: UIViewController {
     var inReplyToScreenName : String?
     var postedTweet : Tweet?
     
+    @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var tweetEntryTextField: UITextView!
     @IBOutlet weak var thumbNailImageLabel: UIImageView!
 
@@ -60,23 +61,23 @@ class TweetComposeViewController: UIViewController {
         }
         
         tweetEntryTextField?.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func tweetButtonTapped(_ sender: AnyObject) {
 
         
         if var tweetText = self.tweetEntryTextField.text {
-        
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
+            
             let successBlock : (Tweet)->() = { (receivedTweet) in
+                hud.hide(animated: true)
                 self.postedTweet = receivedTweet
-                // print(receivedTweet.dictionary)
                 self.performSegue(withIdentifier: TweetComposeViewController.kUnwindToTimeLineViewSegue, sender: self)
             }
             
             let errorBlock : (Error)->() = { (error) in
-                // @todo: show error banner
+                hud.hide(animated: true)
+                ViewUtils.showToast(view: self.networkErrorView)
             }
 
             if let inReplyToID = inReplyToID {
@@ -92,18 +93,6 @@ class TweetComposeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension TweetComposeViewController : UITextViewDelegate {

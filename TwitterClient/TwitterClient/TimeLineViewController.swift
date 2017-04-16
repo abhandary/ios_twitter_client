@@ -49,22 +49,7 @@ class TimeLineViewController: UIViewController  {
         
     }
 
-    func showNetworkError() {
 
-        UIView.transition(with: networkErrorView,
-                          duration: 0.6,
-                          options: .transitionCrossDissolve,
-                          animations: { self.networkErrorView.isHidden = false },
-                          completion: nil)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            UIView.transition(with: self.networkErrorView,
-                              duration: 0.6,
-                              options: .transitionCrossDissolve,
-                              animations: { self.networkErrorView.isHidden = true },
-                              completion: nil)
-        }
-    }
-    
     func reloadTable() {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
 
@@ -75,7 +60,7 @@ class TimeLineViewController: UIViewController  {
                 self.tableView.reloadData()
             }, error: { (receivedError) in
                 hud.hide(animated: true);
-                self.showNetworkError()
+                ViewUtils.showToast(view: self.networkErrorView)
                 self.refreshControl.endRefreshing()
                 print(receivedError)
         })
@@ -147,13 +132,12 @@ extension TimeLineViewController : TweetCellDelegate {
 
         let unretweetSuccessBlock : (Tweet) -> () = { (receivedTweet)  in
             sender.tweet.updateWith(tweet: receivedTweet)
-            // sender.tweet.retweeted = false
             sender.updateRetweetDisplay()
         }
 
         
         let errorBlock : (Error)->() = { (error) in
-            self.showNetworkError()
+            ViewUtils.showToast(view: self.networkErrorView)
         }
 
         
@@ -181,7 +165,7 @@ extension TimeLineViewController : TweetCellDelegate {
             }
             
             let errorBlock : (Error)->() = { (error) in
-                self.showNetworkError()
+                ViewUtils.showToast(view: self.networkErrorView)
             }
 
             if sender.tweet.favorited! == true {
