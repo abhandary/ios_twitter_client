@@ -109,13 +109,13 @@
 		E2154E361E9F364400C8CEF2 /* TwitterClient */ = {
 			isa = PBXGroup;
 			children = (
-				E24D21741EA41710008C5C34 /* Utils */,
 				E2C7AE6E1EA0B74800B4384A /* TwitterClient.entitlements */,
 				E2154E571E9F50CB00C8CEF2 /* UI Layer */,
 				E2154E4C1E9F47A700C8CEF2 /* Application Layer */,
 				E2154E4D1E9F47B000C8CEF2 /* Services Layer */,
 				E2154E4E1E9F481A00C8CEF2 /* Network Layer */,
 				E2154E5E1EA0615C00C8CEF2 /* Models */,
+				E24D21741EA41710008C5C34 /* Utils */,
 				E2154E371E9F364400C8CEF2 /* AppDelegate.swift */,
 				E2154E3B1E9F364400C8CEF2 /* Main.storyboard */,
 				E2154E411E9F364400C8CEF2 /* Assets.xcassets */,
