@@ -120,7 +120,7 @@ extension TimeLineViewController : TweetCellDelegate {
             if sender.tweet.favorited! == true {
                 UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: { (tweet) in
                     sender.tweet.favorited = tweet.favorited!
-                    sender.tweet.user!.favoritesCount = sender.tweet.user!.favoritesCount! + 1
+                    sender.tweet.favoritesCount = tweet.favoritesCount
                     sender.updateFavoritesDisplay()
                     // @todo: insert tweet into timeline
                     }, error: { (error) in
@@ -131,7 +131,7 @@ extension TimeLineViewController : TweetCellDelegate {
                 UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: { (tweet) in
                     
                     sender.tweet.favorited = tweet.favorited!
-                    sender.tweet.user!.favoritesCount = max(sender.tweet.user!.favoritesCount! - 1, 0)
+                    sender.tweet.favoritesCount = tweet.favoritesCount
                     sender.updateFavoritesDisplay()
                     // @todo: insert tweet into timeline
                     }, error: { (error) in

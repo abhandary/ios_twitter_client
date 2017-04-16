@@ -72,12 +72,12 @@ class TweetCell: UITableViewCell {
                         print(error)
                 })
                 
-                // likes count
-                if let likes = user.favoritesCount {
-                    favoriteLabel.text = String(likes)
-                }
             }
             
+            // likes count
+            if let likes = tweet.favoritesCount {
+                favoriteLabel.text = String(likes)
+            }
  
             // retweet count
             retweetCountLabel.text = String(tweet.retweetCount!)
@@ -122,7 +122,7 @@ class TweetCell: UITableViewCell {
     }
 
     func updateFavoritesDisplay() {
-        favoriteLabel.text = String(tweet.user!.favoritesCount!)
+        favoriteLabel.text = String(tweet.favoritesCount!)
         self.setNeedsDisplay()
     }
 

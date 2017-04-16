@@ -40,16 +40,16 @@ class TweetDetailViewController: UIViewController {
                     thumbNailImage.setImageWith(imageURL)
                 }
 
-                // likes
-                if let  likes = user.favoritesCount {
-                    numberOfLikesLabel.text = String(likes)
-                }
-
                 // user name and handle
                 name.text = user.name
                 screenName.text = user.screename
             }
-            
+
+            // likes
+            if let  likes = tweet.favoritesCount {
+                numberOfLikesLabel.text = String(likes)
+            }
+
             // tweet text
             tweetText.text = tweet.text
             
@@ -103,7 +103,8 @@ class TweetDetailViewController: UIViewController {
             if tweet.favorited! == false {
                 UserAccount.currentUserAccount?.post(favoriteTweetID: tweetID, success: { (receivedTweet) in
                         tweet.favorited = receivedTweet.favorited
-                        self.incrementFavoriteCountAndUpdateDisplay()
+                        tweet.favoritesCount = receivedTweet.favoritesCount
+                        self.updateFavoriteCountDisplay()
                     }, error: { (error) in
                         // @todod: show error banner
                         print(error)
@@ -111,7 +112,8 @@ class TweetDetailViewController: UIViewController {
             } else {
                 UserAccount.currentUserAccount?.post(unfavoriteTweetID: tweetID, success: { (receivedTweet) in
                         tweet.favorited = receivedTweet.favorited
-                        self.decrementFavoriteCountAndUpdateDisplay()
+                        tweet.favoritesCount = receivedTweet.favoritesCount
+                        self.updateFavoriteCountDisplay()
                     }, error: { (error) in
                         // @todod: show error banner
                         print(error)
@@ -132,22 +134,12 @@ class TweetDetailViewController: UIViewController {
         }
     }
 
-    func incrementFavoriteCountAndUpdateDisplay() {
+  
+    func updateFavoriteCountDisplay() {
         
         if let tweet = tweet {
-            tweet.user!.favoritesCount = tweet.user!.favoritesCount! + 1
-            numberOfLikesLabel.text = String(tweet.user!.favoritesCount!)
-            if let tweetCell = tweetCell {
-                tweetCell.updateFavoritesDisplay()
-            }
-        }
-    }
-
-    func decrementFavoriteCountAndUpdateDisplay() {
-        
-        if let tweet = tweet {
-            tweet.user!.favoritesCount = max(tweet.user!.favoritesCount! - 1, 0)
-            numberOfLikesLabel.text = String(tweet.user!.favoritesCount!)
+            tweet.favoritesCount = tweet.favoritesCount!
+            numberOfLikesLabel.text = String(tweet.favoritesCount!)
             if let tweetCell = tweetCell {
                 tweetCell.updateFavoritesDisplay()
             }

@@ -16,7 +16,7 @@ class User  {
     var screename : String?
     var profileURL : URL?
     var tagline : String?
-    var favoritesCount : Int?
+
     
     var dictionary : NSDictionary?
     
@@ -30,7 +30,6 @@ class User  {
         
         tagline = dictionary["description"] as? String
         
-        favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
         
         self.dictionary = dictionary as NSDictionary
     }

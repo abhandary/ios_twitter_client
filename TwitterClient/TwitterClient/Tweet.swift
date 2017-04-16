@@ -15,6 +15,8 @@ class Tweet {
     var text : String?
     var tweetDate : Date?
     var retweetCount : Int?
+    var favoritesCount : Int?
+    
 
     // https://courses.codepath.com/courses/intro_to_ios/pages/unretweeting
     var originalTweetIDStr : String?
@@ -49,7 +51,8 @@ class Tweet {
             tweetID = id
         }
         
-
+        favoritesCount = (dictionary["favorite_count"] as? Int) ?? 0
+        
         if let retweetedInt = dictionary["retweeted"] as? Int {
             retweeted = retweetedInt == 1 ? true : false
             
