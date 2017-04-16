@@ -19,6 +19,7 @@ class TweetDetailViewController: UIViewController {
     
     let kTweetReplyFromDetailSegue = "tweetReplyFromDetailSegue"
 
+    static let dateFormatter = DateFormatter()
     
     var tweet : Tweet?
     
@@ -73,8 +74,13 @@ class TweetDetailViewController: UIViewController {
             // tweet text
             tweetText.text = tweet.text
             
-            
-            // @todo: set the date
+            // set tweet date
+            if let tweetDate = tweet.tweetDate {
+                TweetDetailViewController.dateFormatter.dateFormat = "MM/dd/yy, HH:mm a"
+                timeStamp.text = TweetDetailViewController.dateFormatter.string(from: tweetDate)
+            } else {
+                timeStamp.text = ""
+            }
             
             // add gesture recognizers
             let replyImageTapGS = UITapGestureRecognizer(target: self, action: #selector(replyImageTapped))
