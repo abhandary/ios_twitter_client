@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
 
     static let kNotificationUserLoggedIn = "kNotificationUserLoggedIn"
     let kShowUserTimeLineSegue = "showUserTimeLineSegue"
+    let kTwitterSignUpURL = "https://mobile.twitter.com/signup"
     
     var svc : SFSafariViewController?
     
@@ -33,7 +34,7 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        svc = SFSafariViewController(url: URL(string: "https://mobile.twitter.com/signup")!)
+        svc = SFSafariViewController(url: URL(string: kTwitterSignUpURL)!)
         self.present(svc!, animated: true, completion: nil)
     }
     
