@@ -2,7 +2,7 @@
 
 **Chitter** is a basic twitter app to read and compose tweets from the [Twitter API](https://apps.twitter.com/).
 
-Project Leaderboard Rank: 3 (out of 80 cohorts)
+Project Leaderboard Rank: **3** (out of 80 cohorts)
 
 Time spent: **25** hours spent in total
 
